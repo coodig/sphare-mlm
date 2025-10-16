@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'My Profile')
+@section('title', 'Profile')
 
 @section('content')
 <div class="min-h-screen bg-gray-100 p-6 md:p-10">
@@ -8,15 +8,15 @@
     {{-- ✅ Profile Header --}}
     <section class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row items-center justify-between mb-8">
         <div class="flex items-center gap-5">
-            <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-20 h-20 rounded-full border-4 border-blue-500 shadow">
+            <img src="{{ asset('images/user.png') }}" alt="Profile" class="w-20 h-20 rounded-full border-4 border-blue-500 shadow cursor-pointer">
             <div>
-                <h1 class="text-2xl font-semibold text-gray-800">{{ $user->username }}</h1>
+                <h1 class="text-2xl font-semibold text-gray-800">{{ ucfirst( $user->username )}}</h1>
                 <p class="text-gray-500 text-sm">{{ $user->email }}</p>
                 <p class="text-green-600 text-sm mt-1 font-medium">Joined on {{ $user->created_at->format('d M, Y') }}</p>
             </div>
         </div>
         <div>
-            <button class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">Edit Profile</button>
+            <button class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">Edit Profile</button>
         </div>
     </section>
 
@@ -43,7 +43,7 @@
 
         <div class="flex flex-col md:flex-row gap-3">
             <input type="text" readonly value="{{ url('/register?ref=' . $user->username) }}" class="border rounded-lg px-3 py-2 w-full md:w-2/3 text-gray-600 focus:outline-none">
-            <button onclick="copyLink()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Copy Link</button>
+            <button onclick="copyLink()" class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.829 12.861c.171-.413.171-.938.171-1.986s0-1.573-.171-1.986a2.25 2.25 0 0 0-1.218-1.218c-.413-.171-.938-.171-1.986-.171H11.1c-1.26 0-1.89 0-2.371.245a2.25 2.25 0 0 0-.984.984C7.5 9.209 7.5 9.839 7.5 11.1v6.525c0 1.048 0 1.573.171 1.986c.229.551.667.99 1.218 1.218c.413.171.938.171 1.986.171s1.573 0 1.986-.171m7.968-7.968a2.25 2.25 0 0 1-1.218 1.218c-.413.171-.938.171-1.986.171s-1.573 0-1.986.171a2.25 2.25 0 0 0-1.218 1.218c-.171.413-.171.938-.171 1.986s0 1.573-.171 1.986a2.25 2.25 0 0 1-1.218 1.218m7.968-7.968a11.68 11.68 0 0 1-7.75 7.9l-.218.068M16.5 7.5v-.9c0-1.26 0-1.89-.245-2.371a2.25 2.25 0 0 0-.983-.984C14.79 3 14.16 3 12.9 3H6.6c-1.26 0-1.89 0-2.371.245a2.25 2.25 0 0 0-.984.984C3 4.709 3 5.339 3 6.6v6.3c0 1.26 0 1.89.245 2.371c.216.424.56.768.984.984c.48.245 1.111.245 2.372.245H7.5"/></svg></button>
         </div>
     </section>
 
