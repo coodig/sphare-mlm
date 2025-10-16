@@ -38,7 +38,7 @@
     {{-- Navbar --}}
     @include('partials.navbar')
 
-    <div class="flex flex-1">
+    <div class="flex flex-1 overflow-y-auto">
         {{-- Sidebar --}}
         @include('partials.sidebar')
 
@@ -46,7 +46,8 @@
         {{-- yahan `rounded-tl-2xl shadow-inner` hata diya hai for a cleaner look --}}
 
 
-        <main class="flex-1 bg-gray-50 overflow-y-auto">
+        {{-- <main class="flex-1 bg-gray-500 overflow-y-auto"> --}}
+        <main class="flex-1 bg-gray-500 overflow-y-auto ">
             @yield('content')
             @include('partials.footer')
         </main>
