@@ -13,9 +13,11 @@
 
     <div class="flex items-center gap-x-2 text-black text-2xl font-bold cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16"><path fill="currentColor" d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75m0 4A.75.75 0 0 1 2.75 7h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 7.75m0 4a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75"/></svg>
-        <span>
-            Sphare<span class="text-blue-600">MLM</span>
-        </span>
+        <a href="/">
+            <span>
+                Sphare<span class="text-blue-600">MLM</span>
+            </span>
+        </a>
     </div>
 
 
@@ -59,14 +61,14 @@
                         class="font-semibold cursor-pointer">{{ ucfirst($user->username)}}</span></p>
             </a>
 
-            {{-- <form action="{{ route('logout') }}" method="post"> --}}
-                {{-- @csrf --}}
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
                 <button
                     class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-red-100 py-2 px-4 border border-red-500 hover:border-transparent rounded cursor-pointer">
                     Logout
                 </button>
-                {{--
-            </form> --}}
+
+            </form>
         @endauth
     </div>
 

@@ -1,10 +1,10 @@
-@section('title', 'Register')
+{{-- @extends('layouts.auth')
+@section('title', 'Log In')
 
-{{-- <x-guest-layout> --}}
-    <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+@section('content')
         <div class="w-full sm:max-w-md bg-white p-8 rounded-lg shadow-xl border border-gray-200">
             <div class="text-center mb-6">
-                {{-- Logo or App Name --}}
+
                 <a href="/" class="block text-3xl font-bold text-blue-600">
                     SphareMLM
                 </a>
@@ -14,29 +14,11 @@
                 <p class="text-gray-500 text-sm">Start your journey with us!</p>
             </div>
 
-            {{-- <form method="POST" action="{{ route('register') }}"> --}}
+
                 <form method="POST" action="#">
                     @csrf
 
-                    {{-- Sponsor ID --}}
-                    {{-- <x-input-label for="sponsor_id" :value="__('Sponsor ID (Optional)')" />
-                    <x-text-input id="sponsor_id" class="block mt-1 w-full" type="text" name="sponsor_id"
-                        :value="old('sponsor_id', request('ref'))" autofocus autocomplete="sponsor_id"
-                        placeholder="Enter Sponsor ID if you have one" />
-                    <x-input-error :messages="$errors->get('sponsor_id')" class="mt-2" /> --}}
 
-                    {{-- <div class="mb-4">
-                        <label for="sponsor_id">Sponsor ID</label>
-                        <input type="text" id="sponsor_id" class="block mt-1 w-full" name="sponsor_id" autofocus
-                            autocomplete="sponsor_id" placeholder="Enter Sponsor ID if you have one">
-
-                    </div> --}}
-
-                    {{-- <div class="mb-4">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" autofocus autocomplete="name"
-                            placeholder="Enter your name">
-                    </div> --}}
                     <div class="mb-4">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" autofocus autocomplete="email"
@@ -50,8 +32,7 @@
                     <div class="mb-4">
                         <label for="password_confirmation">Password Confirmation</label>
                         <input type="password_confirmation" id="password_confirmation" name="password_confirmation"
-                            autofocus autocomplete="password_confirmation"
-                            placeholder="Enter your password_confirmation">
+                            autofocus autocomplete="password_confirmation" placeholder="Enter your password_confirmation">
                     </div>
 
                     <div class="mb-4">
@@ -61,54 +42,77 @@
                     <div class="mb-4">
                         <p>Not Register yet?<a href="{{ route('register') }}"><span>Register</span></a></p>
                     </div>
-                    {{-- :value="old('sponsor_id', request('ref'))" --}}
 
-                    {{-- Name --}}
-                    {{-- <div class="mb-4">
-                        <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
-                            required autocomplete="name" placeholder="Your Full Name" />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div> --}}
-
-                    {{-- Email Address --}}
-                    {{-- <div class="mb-4">
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                            :value="old('email')" required autocomplete="username" placeholder="name@example.com" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div> --}}
-
-                    {{-- Password --}}
-                    {{-- <div class="mb-4">
-                        <x-input-label for="password" :value="__('Password')" />
-                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                            autocomplete="new-password" placeholder="Min 8 characters" />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div> --}}
-
-                    {{-- Confirm Password --}}
-                    {{-- <div class="mb-6">
-                        <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                            name="password_confirmation" required autocomplete="new-password"
-                            placeholder="Confirm your password" />
-                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                    </div> --}}
-
-                    {{-- <div class="flex items-center justify-between mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
-                        </a>
-
-                        <x-primary-button
-                            class="ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition ease-in-out duration-150 shadow-md">
-                            {{ __('Register') }}
-                        </x-primary-button>
-                    </div> --}}
                 </form>
         </div>
+@endsection --}}
+
+
+@extends('layouts.auth')
+
+@section('title', 'Log In')
+
+@section('content')
+    {{-- Form Header --}}
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-extrabold text-gray-900">
+            Log In Your Account
+        </h2>
+        <p class="mt-2 text-sm text-gray-600">
+            Start your journey with us!
+        </p>
     </div>
-    {{--
-</x-guest-layout> --}}
+
+    {{-- Login Form --}}
+    <form method="POST" action="#" class="space-y-6">
+        @csrf
+
+        {{-- Email --}}
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" required autofocus
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        {{-- Password --}}
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password" name="password" required
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        {{-- Login Button --}}
+        <div>
+            <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Login
+            </button>
+        </div>
+
+        {{-- Register Link --}}
+        <div class="text-center text-sm gap-2">
+            <p class="text-gray-600">
+                Not registered yet?
+                <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                    Register here
+                </a>
+            </p>
+             <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Login
+            </button>
+             <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Login
+            </button>
+             <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Login
+            </button>
+             <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Login
+            </button>
+        </div>
+    </form>
+@endsection

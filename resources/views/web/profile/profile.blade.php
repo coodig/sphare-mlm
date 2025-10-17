@@ -8,8 +8,12 @@
         {{-- ✅ Profile Header --}}
         <section class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row items-center justify-between mb-8">
             <div class="flex items-center gap-5">
-                <img src="{{ asset('assets/images/default-profile.png') }}" alt="Profile"
-                    class="w-24 h-24 rounded-full border-4 border-blue-500 shadow cursor-pointer">
+                <form action="#" method="">
+                    {{-- @csrf --}}
+                    <img src="{{ asset('assets/images/default-profile.png') }}" alt="Profile"
+                        class="w-24 h-24 rounded-full border-4 border-blue-500 shadow cursor-pointer">
+                         <input type="file" id="profileImageInput" accept="image/*">
+                </form>
                 <div class="py-1">
                     <p class="font-bold text-blue-500"><span class="bg-blue-100 rounded-full px-2 pb-0.5">
                             {{ $user->username }}</p>
@@ -50,13 +54,12 @@
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             {{-- <h3 class="text-xl font-semibold text-gray-800 mb-4">Plan Information</h3> --}}
             <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xl font-semibold text-gray-800">Plan Information</h3>
-        {{-- <a href="{{ route('plans.index') }}" --}}
-        <a href="#"
-           class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition duration-300">
-            Update Plan
-        </a>
-    </div>
+                <h3 class="text-xl font-semibold text-gray-800">Plan Information</h3>
+                {{-- <a href="{{ route('plans.index') }}" --}} <a href="#"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition duration-300">
+                    Update Plan
+                </a>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">Package Name</p>
@@ -83,7 +86,7 @@
             <p class="text-sm text-gray-500 mb-4">Invite your friends to join and earn rewards!</p>
 
             <div class="flex flex-col md:flex-row gap-3">
-                <input type="text" readonly value="{{ url('/register?ref='.$user->username) }}"
+                <input type="text" readonly value="{{ url('/register?ref=' . $user->username) }}"
                     class="border rounded-lg px-3 py-2 w-full md:w-2/3 text-gray-600 focus:outline-none">
                 <button onclick="copyLink()"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-1">
