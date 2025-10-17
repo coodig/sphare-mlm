@@ -8,9 +8,9 @@
         {{-- ✅ Profile Header --}}
         <section class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row items-center justify-between mb-8">
             <div class="flex items-center gap-5">
-                <img src="{{ asset('images/user.png') }}" alt="Profile"
-                    class="w-20 h-20 rounded-full border-4 border-blue-500 shadow cursor-pointer">
-                <div>
+                <img src="{{ asset('assets/images/default-profile.png') }}" alt="Profile"
+                    class="w-24 h-24 rounded-full border-4 border-blue-500 shadow cursor-pointer">
+                <div class="py-1">
                     <p class="font-bold text-blue-500"><span class="bg-blue-100 rounded-full px-2 pb-0.5">
                             {{ $user->username }}</p>
                     </span>

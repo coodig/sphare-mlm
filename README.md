@@ -1,61 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SphareMLM 🚀
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, open-source MLM (Multi-Level Marketing) software solution built with the Laravel framework. SphareMLM provides a robust platform for managing user networks, calculating commissions, and handling financial transactions seamlessly.
 
-## About Laravel
+![SphareMLM Dashboard Screenshot](https://user-images.githubusercontent.com/username/repo/screenshot.png) ---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📖 Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [SphareMLM 🚀](#spharemlm-)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🌟 About The Project](#-about-the-project)
+  - [✨ Key Features](#-key-features)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [🚀 Getting Started](#-getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [🎮 Usage](#-usage)
+  - [🤝 Contributing](#-contributing)
+  - [📜 License](#-license)
+  - [✉️ Contact](#️-contact)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🌟 About The Project
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+SphareMLM is designed to provide a reliable and scalable foundation for any MLM business. It simplifies the complexities of network marketing by automating user registration, genealogy tracking, commission calculations, and e-wallet management. This project is built with clean code practices, making it easy for developers to customize and extend.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ Key Features
 
-## Laravel Sponsors
+- **👤 User Management:** Secure registration, profile management, and KYC verification.
+- **🌳 Genealogy Tree:** Interactive visualization of the user network (Downline/Upline).
+- **💰 Commission System:** Automated calculation for various commission types (e.g., Direct, Binary, Level).
+- **💳 E-Wallet:** Integrated wallet for users to manage earnings, check statements, and withdraw funds.
+- **🔗 Referral System:** Easy-to-use referral link generation and tracking.
+- **🖥️ Admin Dashboard:** A powerful backend for admins to manage users, view reports, and configure settings.
+- **🎨 Modern UI:** Clean, responsive, and user-friendly interface built with Tailwind CSS.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🛠️ Tech Stack
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+This project is built using the following technologies:
 
-## Contributing
+- **Backend:** PHP 8.2+, Laravel 11.x
+- **Frontend:** Blade, Tailwind CSS, Vite
+- **Database:** MySQL
+- **Server:** Apache / Nginx
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🚀 Getting Started
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Follow these steps to set up the project locally on your machine.
 
-## Security Vulnerabilities
+### Prerequisites
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Make sure you have the following installed on your system:
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- A local server environment (like XAMPP, WAMP, or Laravel Valet)
+- MySQL
 
-## License
+### Installation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/sphare-mlm.git](https://github.com/your-username/sphare-mlm.git)
+    cd sphare-mlm
+    ```
+
+2.  **Install PHP dependencies:**
+    ```bash
+    composer install
+    ```
+
+3.  **Install JavaScript dependencies:**
+    ```bash
+    npm install
+    ```
+
+4.  **Create your environment file:**
+    ```bash
+    cp .env.example .env
+    ```
+
+5.  **Generate a new application key:**
+    ```bash
+    php artisan key:generate
+    ```
+
+6.  **Configure your `.env` file:**
+    Open the `.env` file and update your database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+
+7.  **Run database migrations and seeders:**
+    The seeder will create default user statuses (Active, Banned, etc.) and an admin account.
+    ```bash
+    php artisan migrate --seed
+    ```
+
+8.  **Build frontend assets:**
+    ```bash
+    npm run dev
+    ```
+
+9.  **Start the development server:**
+    ```bash
+    php artisan serve
+    ```
+    Your application will be running at `http://127.0.0.1:8000`.
+
+---
+
+## 🎮 Usage
+
+Once the application is running, you can log in with the default admin credentials:
+
+- **Email:** `admin@spharemlm.com`
+- **Password:** `password`
+
+From the dashboard, you can start managing users, viewing the genealogy, and exploring other features.
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
+
+---
+
+## ✉️ Contact
+
+Email: sphare@hotmail.com
+
+Project Link: [https://github.com/coodig/sphare-mlm](https://github.com/coodig/sphare-mlm)

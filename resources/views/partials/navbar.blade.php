@@ -11,10 +11,11 @@
 
 <nav class="bg-white text-gray-800 px-6 py-3 flex justify-between items-center shadow-md z-10">
 
-    <div class="text-black text-2xl font-bold cursor-pointer">
-        <a href="/">
-            Sphare<span class="text-blue-400">MLM</span>
-        </a>
+    <div class="flex items-center gap-x-2 text-black text-2xl font-bold cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16"><path fill="currentColor" d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75m0 4A.75.75 0 0 1 2.75 7h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 7.75m0 4a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75"/></svg>
+        <span>
+            Sphare<span class="text-blue-600">MLM</span>
+        </span>
     </div>
 
 
@@ -53,7 +54,7 @@
                 class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors">Register</a>
         @endguest
         @auth
-            <a href="{{ route('profile',['username'=>Auth::user()->username]) }}">
+            <a href="{{ route('profile', ['username' => Auth::user()->username]) }}">
                 <p class="text-lg">👋 Welcome, <span
                         class="font-semibold cursor-pointer">{{ ucfirst($user->username)}}</span></p>
             </a>
