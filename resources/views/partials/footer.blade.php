@@ -99,7 +99,7 @@
         <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
 
             {{-- Column 1: About & Contact Info --}}
-            <div>
+            <div class="me-5">
                 <div class="mb-5">
                     <h3 class="text-lg font-semibold text-black">Sphare<span class="text-blue-600">MLM</span></h3>
                     <p class="text-sm mt-2">

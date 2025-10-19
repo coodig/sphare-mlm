@@ -5,36 +5,64 @@
 @section('content')
     <div class="min-h-screen bg-gray-100 p-6 md:p-10">
 
-        {{-- ✅ Profile Header --}}
         <section class="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row items-center justify-between mb-8">
             <div class="flex items-center gap-5">
-                <form action="#" method="">
-                    {{-- @csrf --}}
+
+                <form action="" method="POST" enctype="multipart/form-data" class="text-center my-8">
+                    @csrf
+
+                    <input type="file" name="profile-img" id="profile-img" accept="image/*" class="hidden"
+                        onchange="previewImage(event)">
+
+                    <label for="profile-img" class="cursor-pointer inline-block relative">
+                        <img id="image-preview" src="{{ asset('assets/images/default-profile.png') }}" alt="Profile Image"
+                            class="w-24 h-24 rounded-full object-cover border-4 border-blue-600 shadow-lg hover:shadow-xl transition-shadow ease-in-out duration-300">
+
+                        {{-- <span
+                            class="absolute bottom-1 right-1 block bg-blue-600 text-white p-2 rounded-full shadow-md border-2 border-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" />
+                            </svg>
+                        </span> --}}
+                    </label>
+
+                    {{-- <div>
+                        <button type="submit"
+                            class="mt-6 py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                            Update Profile
+                        </button>
+                    </div> --}}
+                </form>
+
+                {{-- <form action="#" method="">
+                    @csrf
                     <img src="{{ asset('assets/images/default-profile.png') }}" alt="Profile"
                         class="w-24 h-24 rounded-full border-4 border-blue-500 shadow cursor-pointer">
-                         <input type="file" id="profileImageInput" accept="image/*">
-                </form>
-                <div class="py-1">
-                    <p class="font-bold text-blue-500"><span class="bg-blue-100 rounded-full px-2 pb-0.5">
+                    <input type="file" name="profile-img" id="profile-img" accept="image/*" hidden>
+                </form> --}}
+                <div class="py-1 gap-y-2">
+                    <p class="font-bold text-blue-500 mb-0.5"><span class="bg-blue-100 rounded-full px-2 pb-0.5">
                             {{ $user->username }}</p>
                     </span>
-                    <p class="text-gray-500 text-sm font-semibold">{{ $user->email }}</p>
-                    <p class="text-green-600 text-sm mt-1 font-medium">{{ $user->created_at->format('d M, Y') }}</p>
+                    <p class="text-gray-500 text-sm font-semibold mb-0.5">{{ $user->email }}</p>
+                    <p class="text-green-600 text-sm mt-1 font-medium mb-0.5">{{ $user->created_at->format('d M, Y') }}</p>
                 </div>
             </div>
             <div>
                 <button
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-1">
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-1 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 576 512">
                         <path fill="currentColor"
                             d="m402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6m156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8M460.1 174L402 115.9L216.2 301.8l-7.3 65.3l65.3-7.3zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1l30.9-30.9c4-4.2 4-10.8-.1-14.9" />
                     </svg>
-                    Edit Profile
+                    Update Profile
                 </button>
             </div>
         </section>
 
-        {{-- ✅ Wallet & Network Stats --}}
+
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <div class="bg-white rounded-2xl shadow p-6 text-center">
                 <h2 class="text-gray-500 font-medium mb-2">Wallet Balance</h2>
@@ -50,7 +78,7 @@
             </div>
         </section>
 
-        {{-- ✅ Plan / Package Info --}}
+
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             {{-- <h3 class="text-xl font-semibold text-gray-800 mb-4">Plan Information</h3> --}}
             <div class="flex items-center justify-between mb-4">
@@ -80,7 +108,7 @@
             </div>
         </section>
 
-        {{-- ✅ Referral Section --}}
+
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">Referral Information</h3>
             <p class="text-sm text-gray-500 mb-4">Invite your friends to join and earn rewards!</p>
@@ -99,7 +127,6 @@
             </div>
         </section>
 
-        {{-- ✅ Personal Info --}}
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-5">Personal Information</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -128,7 +155,7 @@
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">Status</p>
                     @php
-                        // Yahan hum status ke naam ke hisaab se CSS class set karenge
+
                         $statusClass = '';
 
                         switch ($user->status->name) {
@@ -160,7 +187,6 @@
             </div>
         </section>
 
-        {{-- ✅ Bank & KYC Info --}}
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-5">Bank & KYC Details</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -190,7 +216,6 @@
             </div>
         </section>
 
-        {{-- ✅ Recent Activities --}}
         <section>
             <h3 class="text-xl font-semibold text-gray-800 mb-5">Recent Activities</h3>
             <div class="bg-white rounded-2xl shadow overflow-x-auto">
@@ -228,7 +253,6 @@
         </section>
     </div>
 
-    {{-- ✅ Copy Referral Link Script --}}
     <script>
         function copyLink() {
             const input = document.querySelector('input[type="text"]');
@@ -237,3 +261,17 @@
         }
     </script>
 @endsection
+
+<script>
+    function previewImage(event) {
+        if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                var output = document.getElementById('image-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+</script>
