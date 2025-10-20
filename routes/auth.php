@@ -12,4 +12,6 @@ Route::prefix('/auth')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login.store');
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+    // Route::get('/google/login')
+
 });
