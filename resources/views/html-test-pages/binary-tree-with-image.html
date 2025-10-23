@@ -1,0 +1,732 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree with Image</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            display: grid;
+            align-items: center;
+            background-color: aquamarine;
+            font-family: 'Poppins','sans-sarif';
+        }
+
+        .tree{
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+        .tree ul{
+            padding: 20px;
+            position: relative;
+            transition: .5s;
+        }
+
+        .tree li{
+            display: inline-table;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding:10px;
+            transition: .5s;
+
+        }
+
+        .tree li::before, .tree li::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 2px solid green;
+            width: 51%;
+            height: 10px;
+        }
+
+        .tree li::after{
+            right: auto;
+            left: 50%;
+            border-left: 2px solid green ;
+        }
+
+        .tree li:only-child:after, .tree li:only-child:before{
+            display: none;
+        }
+
+        .tree li:only-child{
+            padding-top: 0;
+        }
+
+        .tree li:first-child:before, .tree li:last-child:after{
+            border: 0 none;
+        }
+
+        .tree li:last-child:before{
+            border-right: 2px solid green;
+            border-radius: 0px 5px 0px 0px;
+        }
+        .tree li:first-child:after{
+            /* border-right: 2px solid green; */
+            border-radius: 5px 0px 0px 0px;
+        }
+
+        .tree ul ul::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 2px solid green;
+            width: 0px;
+            height: 20px;
+        }
+
+        .tree a{
+            border: 2px solid green;
+            padding: 10px;
+            display: inline-grid;
+            border-radius: 1rem;
+            text-decoration-line: none;
+            transition: .5s;
+        }
+
+        .tree a img{
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px !important;
+            border-radius: 1rem;
+            margin: auto;
+        }
+
+        .tree a span{
+            border-radius: 5px;
+            border: 2px solid green;
+            color: darkgreen;
+            background-color: lightgray;
+            padding: 5px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .tree li a:hover, .tree li a:hover img, .tree li a:hover span, .tree li a:hover+ul li a{
+            background-color: cadetblue;
+            color: blue;
+            border: 2px solid gray;
+            box-shadow: 0px 0px 8px -5px white;
+        }
+
+        .tree li a:hover+ul li:after, .tree li a:hover+ul li:before, .tree li a:hover+ul:before, .tree li a:hover+ul ul:before{
+            border-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Binray Tree with Image</h1>
+    <div class="tree">
+        <ul>
+            <li><a href="#"><img src="default.png" alt=""><span>root</span></a>
+                <ul>
+                    <li><a href="#"><img src="default.png" alt=""><span>Grand Child</span></img></a>
+                        <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a>
+                            <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                        </ul></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a>
+                            <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                        </ul></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="default.png" alt=""><span>Grand Child</span></img></a>
+                        <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a>
+                            <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                        </ul>
+                            </li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a>
+                            <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>
+                        </ul></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html> -->
+<!-- <li><a href="#"><img src="default.png" alt=""><span>Grand Child</span></img></a></li> -->
+<!-- <li><a href="#"><img src="default.png" alt=""><span>Great Grand Child</span></img></a></li>-->
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree with Images</title>
+    <style>
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        .tree li {
+            text-align: center;
+            position: relative;
+            padding: 20px 5px 0 5px;
+        }
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 50%;
+            border-top: 1px solid #000;
+        }
+        .tree li::before {
+            left: -50%;
+            border-right: 1px solid #000;
+        }
+        .tree li::after {
+            right: -50%;
+            border-left: 1px solid #000;
+        }
+        .tree li:only-child::before, .tree li:only-child::after {
+            display: none;
+        }
+        .tree li a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .tree li img {
+            width: 40px;
+            height: 40px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary Tree with Images (4 Levels)</h1>
+    <div class="tree">
+        <ul>
+            <li>
+                <a href="#"><img src="default.png" alt=""><span>Root</span></a>
+                <ul>
+
+                    <li>
+                        <a href="#"><img src="default.png" alt=""><span>Child 1</span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 1</span></a>
+                                <ul>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 1</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 2</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 2</span></a>
+                                <ul>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 3</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 4</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img src="default.png" alt=""><span>Child 2</span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 3</span></a>
+                                <ul>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 5</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 6</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 4</span></a>
+                                <ul>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 7</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 8</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html> -->
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Binary Tree</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Scrollable container */
+        .tree-container {
+            overflow-x: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+
+        .tree {
+            display: inline-block; /* so it takes width as per content */
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        .tree li {
+            text-align: center;
+            position: relative;
+            padding: 20px 5px 0 5px;
+        }
+
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 50%;
+            border-top: 1px solid #000;
+        }
+
+        .tree li::before {
+            left: -50%;
+            border-right: 1px solid #000;
+        }
+
+        .tree li::after {
+            right: -50%;
+            border-left: 1px solid #000;
+        }
+
+        .tree li:only-child::before, .tree li:only-child::after {
+            display: none;
+        }
+
+        .tree li a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .tree li img {
+            width: 40px;
+            height: 40px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scrollable Binary Tree (4 Levels)</h1>
+    <div class="tree-container">
+        <div class="tree">
+            <ul>
+                <li>
+                    <a href="#"><img src="default.png" alt=""><span>Root</span></a>
+                    <ul>
+                        <li>
+                            <a href="#"><img src="default.png" alt=""><span>Child 1</span></a>
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="default.png" alt=""><span>Grandchild 1</span></a>
+                                    <ul>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 1</span></a></li>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 2</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="default.png" alt=""><span>Grandchild 2</span></a>
+                                    <ul>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 3</span></a></li>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 4</span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="default.png" alt=""><span>Child 2</span></a>
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="default.png" alt=""><span>Grandchild 3</span></a>
+                                    <ul>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 5</span></a></li>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 6</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="default.png" alt=""><span>Grandchild 4</span></a>
+                                    <ul>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 7</span></a></li>
+                                        <li><a href="#"><img src="default.png" alt=""><span>Great Grandchild 8</span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expandable Binary Tree</title>
+<!-- <style>
+    body { font-family: Arial, sans-serif; }
+    h1 { text-align: center; margin-bottom: 20px; }
+
+    .tree-container {
+        overflow-x: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        white-space: nowrap;
+    }
+
+    .tree {
+        display: inline-block;
+    }
+
+    .tree ul {
+        padding-top: 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+    }
+
+    .tree li {
+        text-align: center;
+        position: relative;
+        padding: 20px 5px 0 5px;
+    }
+
+    .tree li::before, .tree li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 50%;
+        border-top: 1px solid #000;
+    }
+
+    .tree li::before { left: -50%; border-right: 1px solid #000; }
+    .tree li::after { right: -50%; border-left: 1px solid #000; }
+    .tree li:only-child::before, .tree li:only-child::after { display: none; }
+
+    .tree li a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background: #fff;
+        position: relative;
+    }
+
+    .tree li img {
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: 0 auto 5px;
+    }
+
+    .toggle-btn {
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 5px;
+        font-weight: bold;
+        color: blue;
+    }
+
+    .tree li ul.collapsible {
+        display: none;
+    }
+</style> -->
+
+<style>
+    body { font-family: Arial, sans-serif; }
+    h1 { text-align: center; margin-bottom: 20px; }
+
+    .tree-container {
+        overflow-x: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        white-space: nowrap;
+    }
+
+    .tree {
+        display: inline-block;
+        /* सुनिश्चित करें कि ट्री टॉप से शुरू हो */
+        vertical-align: top;
+    }
+
+    .tree ul {
+        padding-top: 20px;
+        position: relative;
+        display: block;
+        /* display: flex; */
+        justify-content: center;
+        list-style-type: none;
+
+        /* FIX: ul से पैडिंग हटाएं ताकि li कंट्रोल कर सके */
+        padding-left: 0;
+    }
+
+   .tree li {
+    text-align: center;
+    position: relative;
+    padding: 20px 5px 0 5px;
+
+    /* flex: 1;  <-- इस लाइन को हटा दें */
+
+    /* यह सुनिश्चित करता है कि li अपने कंटेंट के हिसाब से साइज़ ले */
+    display: inline-block;
+    vertical-align: top;
+}
+
+    /* FIX: यह हॉरिजॉन्टल लाइन बनाएगा (आड़ी लाइन) */
+    .tree li::before, .tree li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 50%;
+        border-top: 1px solid #000;
+        height: 20px; /* यह ऊंचाई वर्टिकल लाइन के लिए स्पेस देगी */
+    }
+
+    /* FIX: ::before बाएं आधे हिस्से को हैंडल करेगा */
+    .tree li::before {
+        right: 50%;
+        border-right: 1px solid #000; /* वर्टिकल लाइन का आधा हिस्सा */
+    }
+
+    /* FIX: ::after दाएं आधे हिस्से को हैंडल करेगा */
+    .tree li::after {
+        left: 50%;
+        border-left: 1px solid #000; /* वर्टिकल लाइन का दूसरा आधा हिस्सा */
+    }
+
+    /* FIX: सिर्फ एक बच्चे (only-child) के लिए कोई लाइन न दिखाएं */
+    .tree li:only-child::before, .tree li:only-child::after {
+        display: none;
+    }
+
+    /* FIX: पहले बच्चे (first-child) की बाईं लाइन छिपाएं */
+    .tree li:first-child::before {
+        border: 0 none;
+    }
+
+    /* FIX: आखिरी बच्चे (last-child) की दाईं लाइन छिपाएं */
+    .tree li:last-child::after {
+        border: 0 none;
+    }
+
+    /* FIX: आखिरी बच्चे की बाईं लाइन को ठीक करें */
+    .tree li:last-child::before {
+        border-right: 1px solid #000;
+        border-radius: 0 5px 0 0;
+    }
+
+    /* FIX: पहले बच्चे की दाईं लाइन को ठीक करें */
+    .tree li:first-child::after {
+        border-left: 1px solid #000;
+        border-radius: 5px 0 0 0;
+    }
+
+    /* FIX: रूट नोड (सबसे ऊपर वाला) के ऊपर की लाइनें हटाएं */
+    .tree > ul > li::before,
+    .tree > ul > li::after {
+        border: 0 none;
+    }
+
+    /* FIX: ul से पहले एक वर्टिकल लाइन जोड़ें जो इसे पेरेंट से जोड़े */
+    .tree ul ul::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-left: 1px solid #000;
+        width: 0;
+        height: 20px;
+        /* सेंटर करने के लिए */
+        transform: translateX(-50%);
+    }
+
+
+    .tree li a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background: #fff;
+        position: relative; /* यह z-index के लिए जरूरी है */
+
+        /* FIX: यह सुनिश्चित करता है कि नोड लाइन के ऊपर रहे */
+        z-index: 1;
+    }
+
+    .tree li img {
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: 0 auto 5px;
+    }
+
+    /* Plus/Minus button style */
+    .toggle-btn {
+        cursor: pointer;
+        display: block; /* FIX: इसे नोड के नीचे लाएं */
+        margin: 5px auto 0; /* सेंटर करें */
+        font-weight: bold;
+        color: blue;
+        width: 20px; /* क्लिक एरिया */
+    }
+
+    /* Hide children initially for collapsible part */
+    .tree li ul.collapsible {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<h1>Expandable Binary Tree</h1>
+<div class="tree-container">
+    <div class="tree">
+        <ul>
+            <li>
+                <a href="#"><img src="default.png" alt=""><span>Root</span></a>
+                <ul>
+                    <li>
+                        <a href="#"><img src="default.png" alt=""><span>Child 1</span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 1</span></a>
+                                <ul class="collapsible">
+                                    <li>
+                                        <a href="#"><img src="default.png" alt=""><span>Level 5 Node 1</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="default.png" alt=""><span>Level 5 Node 2</span></a>
+                                    </li>
+                                </ul>
+                                <span class="toggle-btn">[+]</span>
+                            </li>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 2</span></a>
+                                <ul class="collapsible">
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 3</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 4</span></a></li>
+                                </ul>
+                                <span class="toggle-btn">[+]</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img src="default.png" alt=""><span>Child 2</span></a>
+                        <ul>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 3</span></a>
+                                <ul class="collapsible">
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 5</span></a>
+                                        <ul class="collapsible">
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 5</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 6</span></a></li>
+                                </ul>
+                                    </li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 6</span></a></li>
+                                </ul>
+                                <span class="toggle-btn">[+]</span>
+                            </li>
+                            <li>
+                                <a href="#"><img src="default.png" alt=""><span>Grandchild 4</span></a>
+                                <ul class="collapsible">
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 7</span></a></li>
+                                    <li><a href="#"><img src="default.png" alt=""><span>Level 5 Node 8</span></a></li>
+                                </ul>
+                                <span class="toggle-btn">[+]</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Collapsible toggle
+    const buttons = document.querySelectorAll('.toggle-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const ul = btn.previousElementSibling; // target the <ul.collapsible>
+            if (ul.style.display === 'block') {
+                ul.style.display = 'none';
+                btn.textContent = '[+]';
+            } else {
+                ul.style.display = 'block';
+                btn.textContent = '[-]';
+            }
+        });
+    });
+</script>
+</body>
+</html>

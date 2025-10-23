@@ -1,0 +1,538 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Binary Tree</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    />
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"
+    ></script>
+</head>
+<style>
+    .tree {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        overflow-x: auto;
+    }
+
+
+    .node--root > .node__element {
+        background-color: pink;
+        border-radius: 1rem;
+        font-weight: 500;
+    }
+
+    .node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 1rem;
+        margin: 0 20px;
+        position: relative;
+    }
+
+
+    .node:not(.node--root) .node__element::before {
+        content: '';
+        background-color: green;
+        height: 20px;
+        width: 2px;
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0px;
+        margin: auto;
+    }
+
+    .node__element {
+        background-color: rosybrown;
+        border-radius: 1rem;
+        padding: 1rem;
+        white-space: nowrap;
+    }
+
+    .node__children {
+        display: flex;
+        border-top: 2px solid green;
+    }
+
+    .node__bottom-line {
+        height: 20px;
+        width: 2px;
+        background-color: green;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1 class="text-danger">JS Binary Tree UI</h1>
+
+        <div class="tree">
+            </div>
+    </div>
+</body>
+
+<script>
+
+    const getTreeData = () => {
+        return {
+            element: 'Head Office',
+            left: {
+                element: 'Ravi Sharma',
+                left: {
+                    element: 'Amit Verma',
+                    left: {
+                        element: 'Shivam Tiwari',
+                        left: {
+                            element: 'Deepak Singh',
+                            left: { element: 'Harshit Yadav' },
+                            right: { element: 'Anmol Pandey' }
+                        },
+                        right: {
+                            element: 'Pankaj Sahu',
+                            left: { element: 'Kiran Mishra' },
+                            right: { element: 'Gaurav Dubey' }
+                        }
+                    },
+                    right: {
+                        element: 'Kartik Jaiswal',
+                        left: {
+                            element: 'Manish Gupta',
+                            left: { element: 'Rakesh Chauhan' },
+                            right: { element: 'Abhishek Yadav' }
+                        },
+                        right: {
+                            element: 'Aayush Patel',
+                            left: { element: 'Ankit Singh' },
+                            right: { element: 'Priyanshu Verma' }
+                        }
+                    }
+                },
+                right: {
+                    element: 'Neha Srivastava',
+                    left: {
+                        element: 'Shreya Gupta',
+                        left: {
+                            element: 'Komal Tiwari',
+                            left: { element: 'Ruchi Pandey' },
+                            right: { element: 'Sonam Singh' }
+                        },
+                        right: {
+                            element: 'Pooja Yadav',
+                            left: { element: 'Megha Sharma' },
+                            right: { element: 'Swati Gupta' }
+                        }
+                    },
+                    right: {
+                        element: 'Akash Dubey',
+                        left: {
+                            element: 'Nikhil Verma',
+                            left: { element: 'Ananya Mishra' },
+                            // right: { element: 'Rohit Kumar' }
+                        },
+                        right: {
+                            element: 'Chirag Agarwal',
+                            left: { element: 'Simran Patel' },
+                            // right: { element: 'Ritesh Chauhan' }
+                        }
+                    }
+                }
+            },
+            right: {
+                element: 'Adarsh Kumar',
+                left: {
+                    element: 'Arvind Singh',
+                    left: {
+                        element: 'Shubham Patel',
+                        left: {
+                            element: 'Astha Mishra',
+                            left: { element: 'Alpana Gupta' },
+                            right: { element: 'Rashi Yadav' }
+                        },
+                        right: {
+                            // element: 'Anjali Verma',
+                            left: { element: 'Rekha Tiwari' },
+                            right: { element: 'Keshav Chauhan' }
+                        }
+                    },
+                    right: {
+                        element: 'Rahul Gupta',
+                        left: {
+                            element: 'Mehul Agarwal',
+                            left: { element: 'Tanisha Singh' },
+                            right: { element: 'Harsh Dubey' }
+                        },
+                        right: {
+                            element: 'Sakshi Verma',
+                            left: { element: 'Devesh Patel' },
+                            right: { element: 'Aarav Sharma' }
+                        }
+                    }
+                },
+                right: {
+                    element: 'Priya Sharma',
+                    left: {
+                        element: 'Karan Verma',
+                        left: {
+                            element: 'Divya Singh',
+                            left: { element: 'Nidhi Patel' },
+                            right: { element: 'Rohini Gupta' }
+                        },
+                        right: {
+                            element: 'Aditi Dubey',
+                            left: { element: 'Tanya Sharma' },
+                            right: { element: 'Rajesh Chauhan' }
+                        }
+                    },
+                    right: {
+                        element: 'Vivek Tiwari',
+                        left: {
+                            element: 'Ayushi Mishra',
+                            left: { element: 'Neelam Pandey' },
+                            right: { element: 'Aman Kumar' }
+                        },
+                        right: {
+                            element: 'Anurag Singh',
+                            left: { element: 'Dhruv Gupta' },
+                            right: { element: 'Reena Verma' }
+                        }
+                    }
+                }
+            }
+        };
+    };
+
+
+    const renderNodeContent = (node) => {
+
+        if (!node) {
+            return '';
+        }
+
+        const { element, left, right } = node;
+
+
+        return `
+            <div class="node__element">${element}</div>
+
+
+            ${(left || right) ? `
+                <div class="node__bottom-line"></div>
+                <div class="node__children">
+
+
+                    ${left ? `<div class="node">${renderNodeContent(left)}</div>` : ''}
+                    ${right ? `<div class="node">${renderNodeContent(right)}</div>` : ''}
+                </div>
+            ` : ''}
+        `;
+    }
+
+
+    const main = () => {
+        const rootNodeData = getTreeData();
+        const treeDOMElement = document.querySelector('.tree');
+
+
+        treeDOMElement.innerHTML = `
+            <div class="node node--root">
+                ${renderNodeContent(rootNodeData)}
+            </div>
+        `;
+    };
+
+    main();
+</script>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MLM Org Tree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<style>
+    /* ===============================================
+      ===== नया और बेहतर CSS (पूरा बदल दिया गया) =====
+      ===============================================
+    */
+    body {
+        background-color: #f4f7f6;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    /* पूरी ट्री का कंटेनर */
+    .org-tree {
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    /* HTML स्ट्रक्चर अब <ul> और <li> से बना है।
+      यह CSS उसे आर्गेनाईजेशन चार्ट में बदलता है।
+    */
+    .org-tree ul {
+        padding-top: 20px;
+        position: relative;
+        transition: all 0.5s;
+        /* हॉरिजॉन्टल लाइन (बच्चों को जोड़ने वाली) */
+        border-top: 2px solid #6c757d;
+    }
+
+    .org-tree li {
+        /* यह 'table' लेआउट लाइनों को सही से अलाइन करने
+          के लिए सबसे आसान तरीका है।
+        */
+        display: table-cell;
+        text-align: center;
+        list-style-type: none;
+        position: relative;
+        padding: 20px 10px 0 10px; /* नोड्स के बीच स्पेस */
+        transition: all 0.5s;
+    }
+
+    /* वर्टिकल लाइन (ऊपर की तरफ) */
+    .org-tree li::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-left: 2px solid #6c757d;
+        width: 0;
+        height: 20px;
+    }
+
+    /* यह वह कार्ड है जिसमें यूज़र का नाम और आइकॉन है
+      (पहले यह .node__element था)
+    */
+    .org-tree .node-card {
+        padding: 1rem 1.25rem;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        min-width: 180px;
+        text-align: left;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .org-tree .node-card:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* कार्ड के अंदर का कंटेंट */
+    .node-card .node-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .node-card .node-icon {
+        font-size: 2.5rem; /* 40px */
+        color: #0d6efd;
+        margin-right: 12px;
+    }
+
+    .node-card .node-name {
+        font-weight: 600;
+        color: #333;
+    }
+    .node-card .node-title {
+        font-size: 0.8rem;
+        color: #555;
+    }
+
+    /* सबसे ऊपर वाले नोड (रूट) को ख़ास स्टाइल देना */
+    .org-tree > ul > li > .node-card {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    .org-tree > ul > li > .node-card .node-icon,
+    .org-tree > ul > li > .node-card .node-name,
+    .org-tree > ul > li > .node-card .node-title {
+        color: #ffffff;
+    }
+
+
+    /* ===== कोलैप्स (Collapse) फंक्शनैलिटी ===== */
+
+    /* जिस li में बच्चे (children) हैं, उसे 'has-children' क्लास दें */
+    .org-tree li.has-children > .node-card::after {
+        content: '-'; /* माइनस का निशान */
+        position: absolute;
+        bottom: -11px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 22px;
+        height: 22px;
+        line-height: 20px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #6c757d;
+        border-radius: 50%;
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    /* जब 'collapsed' क्लास लगे, तो बच्चों (ul) को छिपा दो */
+    .org-tree li.collapsed > ul {
+        display: none;
+    }
+
+    /* जब 'collapsed' क्लास लगे, तो निशान को '+' (प्लस) में बदलो */
+    .org-tree li.collapsed > .node-card::after {
+        content: '+';
+        color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+</style>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center mt-4" style="color: #343a40;">MLM Downline Tree</h1>
+
+        <div class="org-tree">
+            <ul>
+                <li>
+                    <div class="node-card">
+                        <div class="node-content">
+                            <span class="material-symbols-outlined node-icon">corporate_fare</span>
+                            <div>
+                                <div class="node-name">Head Office</div>
+                                <div class="node-title">Root User</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul>
+                        <li class="has-children collapsed"> <div class="node-card">
+                                <div class="node-content">
+                                    <span class="material-symbols-outlined node-icon">account_circle</span>
+                                    <div>
+                                        <div class="node-name">Ravi Sharma</div>
+                                        <div class="node-title">Level 1</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul>
+                                <li class="has-children collapsed">
+                                    <div class="node-card">
+                                         <div class="node-content">
+                                            <span class="material-symbols-outlined node-icon">account_circle</span>
+                                            <div><div class="node-name">Amit Verma</div><div class="node-title">Level 2</div></div>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><div class="node-card"><div class="node-content"><span class="material-symbols-outlined node-icon">person</span><div><div class="node-name">Shivam Tiwari</div><div class="node-title">Level 3</div></div></div></div></li>
+                                        <li><div class="node-card"><div class="node-content"><span class="material-symbols-outlined node-icon">person</span><div><div class="node-name">Kartik Jaiswal</div><div class="node-title">Level 3</div></div></div></div></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children collapsed">
+                                    <div class="node-card">
+                                         <div class="node-content">
+                                            <span class="material-symbols-outlined node-icon">account_circle</span>
+                                            <div><div class="node-name">Neha Srivastava</div><div class="node-title">Level 2</div></div>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><div class="node-card"><div class="node-content"><span class="material-symbols-outlined node-icon">person</span><div><div class="node-name">Shreya Gupta</div><div class="node-title">Level 3</div></div></div></div></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="has-children collapsed"> <div class="node-card">
+                                <div class="node-content">
+                                    <span class="material-symbols-outlined node-icon">account_circle</span>
+                                    <div>
+                                        <div class="node-name">Adarsh Kumar</div>
+                                        <div class="node-title">Level 1</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul>
+                                <li>
+                                    <div class="node-card">
+                                         <div class="node-content">
+                                            <span class="material-symbols-outlined node-icon">account_circle</span>
+                                            <div><div class="node-name">Arvind Singh</div><div class="node-title">Level 2</div></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="node-card">
+                                         <div class="node-content">
+                                            <span class="material-symbols-outlined node-icon">account_circle</span>
+                                            <div><div class="node-name">Priya Sharma</div><div class="node-title">Level 2</div></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    /* ===============================================
+      ===== नया JavaScript (क्लिक हैंडल करने के लिए) =====
+      ===============================================
+    */
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // सभी <li> को चुनें जिनके बच्चे (children) हैं
+        const treeNodes = document.querySelectorAll('.org-tree li.has-children');
+
+        treeNodes.forEach(node => {
+            // उनके कार्ड (<a> या <div>) को चुनें
+            const card = node.querySelector('.node-card');
+
+            card.addEventListener('click', function (e) {
+                // इवेंट को रोकें ताकि पेज रीलोड न हो
+                e.preventDefault();
+                e.stopPropagation();
+
+                // उस <li> पर 'collapsed' क्लास को टॉगल (toggle) करें
+                node.classList.toggle('collapsed');
+            });
+        });
+
+        /* यह सुनिश्चित करने के लिए कि हम सिर्फ '+' और '-' आइकॉन वाले
+           <li> को ही 'has-children' क्लास दें।
+        */
+        const allListItems = document.querySelectorAll('.org-tree li');
+        allListItems.forEach(li => {
+            if (li.querySelector('ul')) {
+                li.classList.add('has-children');
+            }
+        });
+    });
+</script>
+</html>

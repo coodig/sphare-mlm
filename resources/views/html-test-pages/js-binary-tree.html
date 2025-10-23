@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JS Binary Tree</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <style>
+        .tree {
+            display: flex;
+            background-color: red;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 3rem;
+            /* margin-left:5rem ; */
+            border-radius: 1rem;
+            align-items: center;
+            overflow-x: auto;
+            align-items: flex-start;
+        }
+
+        .node--root > .node__element {
+            background-color: skyblue;
+            border-radius: 1rem;
+            font-weight: 500;
+            border: 2px solid blue;
+        }
+        .node {
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-radius: 1rem;
+            margin: 0px 20px;
+            position: relative;
+            background-color: aquamarine;
+        }
+
+        .node:not(.node--root) .node__element::before {
+            content: "";
+            background-color: blue;
+            height: 20px;
+            width: 2px;
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            /* top: 0px; */
+            top: 0px;
+            margin: auto;
+        }
+
+        .node__element {
+            background-color: darkblue;
+            border-radius: 1rem;
+            padding: 1rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .node__element:hover {
+            background-color: lightblue;
+            color: black;
+            cursor: pointer;
+            border: 2px solid black;
+            transition: all 0.1s;
+        }
+
+        .node__children {
+            /* display: flex; */
+            display: inline-flex;
+            border-top: 2px solid blue;
+            border-radius: 2px;
+        }
+
+        .node__bottom-line {
+            height: 20px;
+            width: 2px;
+            background-color: blue;
+        }
+        .tree-div{
+            background-color: green;
+            margin: 2rem;
+            padding: 2rem;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <h1 class="text-danger">JS Binary Tree UI</h1>
+            <div class="tree">
+                <div class="tree-div">
+                    <!-- <div class="node node--root">
+                        <div class="node__element">Main</div>
+                    <div class="node__bottom-line"></div>
+                    <div class="node__children">
+                        <div class="node">
+                            <div class="node__element">Left</div>
+                        </div>
+                        <div class="node">
+                            <div class="node__element">Right</div>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        console.log("yes");
+
+        const getTreeData = () => {
+            return {
+                element: "Head Office",
+                left: {
+                    element: "Ravi Sharma",
+                    left: {
+                        element: "Amit Verma",
+                        left: {
+                            element: "Shivam Tiwari",
+                            left: {
+                                element: "Deepak Singh",
+                                left: { element: "Harshit Yadav" },
+                                right: { element: "Anmol Pandey" },
+                            },
+                            right: {
+                                element: "Pankaj Sahu",
+                                left: { element: "Kiran Mishra" },
+                                right: { element: "Gaurav Dubey" },
+                            },
+                        },
+                        right: {
+                            element: "Kartik Jaiswal",
+                            left: {
+                                element: "Manish Gupta",
+                                left: { element: "Rakesh Chauhan" },
+                                right: { element: "Abhishek Yadav" },
+                            },
+                            //     right: {
+                            //         element: 'Aayush Patel',
+                            //         left: { element: 'Ankit Singh' },
+                            //         right: { element: 'Priyanshu Verma' }
+                            //     }
+                        },
+                    },
+                    right: {
+                        element: "Neha Srivastava",
+                        left: {
+                            element: "Shreya Gupta",
+                            left: {
+                                element: "Komal Tiwari",
+                                left: { element: "Ruchi Pandey" },
+                                right: { element: "Sonam Singh" },
+                            },
+                            right: {
+                                element: "Pooja Yadav",
+                                left: { element: "Megha Sharma" },
+                                right: { element: "Swati Gupta" },
+                            },
+                        },
+                        // right: {
+                        //     element: 'Akash Dubey',
+                        //     left: {
+                        //         element: 'Nikhil Verma',
+                        //         left: { element: 'Ananya Mishra' },
+                        //         right: { element: 'Rohit Kumar' }
+                        //     },
+                        //     right: {
+                        //         element: 'Chirag Agarwal',
+                        //         left: { element: 'Simran Patel' },
+                        //         right: { element: 'Ritesh Chauhan' }
+                        //     }
+                        // }
+                    },
+                },
+                right: {
+                    element: "Adarsh Kumar",
+                    left: {
+                        element: "Arvind Singh",
+                        left: {
+                            element: "Shubham Patel",
+                            left: {
+                                element: "Astha Mishra",
+                                left: { element: "Alpana Gupta" },
+                                right: { element: "Rashi Yadav" },
+                            },
+                            right: {
+                                element: "Anjali Verma",
+                                left: { element: "Rekha Tiwari" },
+                                right: { element: "Keshav Chauhan" },
+                            },
+                        },
+                        //         right: {
+                        //             element: 'Rahul Gupta',
+                        //             left: {
+                        //                 element: 'Mehul Agarwal',
+                        //                 left: { element: 'Tanisha Singh' },
+                        //                 right: { element: 'Harsh Dubey' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Sakshi Verma',
+                        //                 left: { element: 'Devesh Patel' },
+                        //                 right: { element: 'Aarav Sharma' }
+                        //             }
+                        //         }
+                        //     },
+                        //     right: {
+                        //         element: 'Priya Sharma',
+                        //         left: {
+                        //             element: 'Karan Verma',
+                        //             left: {
+                        //                 element: 'Divya Singh',
+                        //                 left: { element: 'Nidhi Patel' },
+                        //                 right: { element: 'Rohini Gupta' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Aditi Dubey',
+                        //                 left: { element: 'Tanya Sharma' },
+                        //                 right: { element: 'Rajesh Chauhan' }
+                        //             }
+                        //         },
+                        //         right: {
+                        //             element: 'Vivek Tiwari',
+                        //             left: {
+                        //                 element: 'Ayushi Mishra',
+                        //                 left: { element: 'Neelam Pandey' },
+                        //                 right: { element: 'Aman Kumar' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Anurag Singh',
+                        //                 left: { element: 'Dhruv Gupta' },
+                        //                 right: { element: 'Reena Verma' }
+                        //             }
+                        //         }
+                    },
+                },
+            };
+        };
+
+        const renderNodeContent = (node) => {
+            if (!node) {
+                return "";
+            }
+            const { element, left, right } = node;
+
+            return `
+        <div class="node__element">${element}</div>
+        ${
+            left || right
+                ? `
+        <div class="node__bottom-line"></div>
+        <div class="node__children">
+            ${left ? `<div class="node">${renderNodeContent(left)}</div>` : ""}
+            ${
+                right
+                    ? `<div class="node">${renderNodeContent(right)}</div>`
+                    : ""
+            }
+            </div>
+            `
+                : ""
+        }
+        `;
+        };
+
+        //     ${left ? (`<div class="node">
+        //         <div class="node__element">${renderTree(left)}</div>
+        // </div>`):''}
+        //     ${right ? (`<div class="node">
+        //         <div class="node__element">${renderTree(right)}</div>
+        // </div>`):''}
+
+        const main = () => {
+            const rootNodeData = getTreeData();
+            const treeDOMElement = document.querySelector(".tree");
+            // treeDOMElement.innerHTML = renderTree(rootNode);
+            treeDOMElement.innerHTML = `
+                <div class="node node--root">
+                    ${renderNodeContent(rootNodeData)}
+                </div>
+                `;
+            // document.write(renderTree())
+        };
+
+        main();
+    </script>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree UI</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        /* CSS ट्री को स्टाइल करने के लिए */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        /* ट्री का मेन कंटेनर */
+        .tree {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* सभी नेस्टेड लिस्ट के लिए डिफ़ॉल्ट स्टाइल हटाना */
+        .tree ul {
+            position: relative;
+            padding-top: 20px;
+            display: flex;
+            list-style-type: none;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+        .tree li {
+            /* नोड्स के बीच हॉरिजॉन्टल स्पेस */
+            padding: 0 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* ऊपर से नीचे तक वर्टिकल लाइनें बनाना */
+        .tree li::before, .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 2px solid #ccc;
+            width: 50%;
+            height: 20px;
+        }
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 2px solid #ccc;
+        }
+
+        /* पहले और आखिरी चाइल्ड से फालतू लाइनें हटाना */
+        .tree li:only-child::after, .tree li:only-child::before {
+            display: none;
+        }
+        .tree li:first-child::before, .tree li:last-child::after {
+            border: 0 none;
+        }
+        .tree li:last-child::before {
+            border-right: 2px solid #ccc;
+            border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+        }
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+        }
+
+        /* रूट नोड से ऊपर की लाइन हटाना */
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 2px solid #ccc;
+            width: 0;
+            height: 20px;
+        }
+
+        /* नोड का स्टाइल (सर्कल) */
+        .tree li .node {
+            border: 2px solid #ccc;
+            background-color: #fff;
+            padding: 10px 15px;
+            display: inline-block;
+            border-radius: 50%; /* सर्कल बनाने के लिए */
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .tree li .node:hover {
+            background-color: #e9e9e9;
+            border-color: #aaa;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 1. आपका डमी JSON डेटा
+        const treeData = {
+            "value": 10,
+            "left": {
+                "value": 5,
+                "left": {
+                    "value": 3,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "value": 7,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": {
+                "value": 15,
+                "left": {
+                    "value": 12,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "value": 18,
+                    "left": null,
+                    "right": null
+                }
+            }
+        };
+
+        // 2. TreeNode कंपोनेंट (Recursive)
+        // यह कंपोनेंट खुद को तब तक कॉल करता है जब तक कि नोड null न हो जाए
+        function TreeNode({ node }) {
+            // अगर नोड मौजूद नहीं है (यानी null), तो कुछ भी रेंडर न करें
+            if (!node) {
+                return null;
+            }
+
+            // जाँच करें कि क्या लेफ्ट या राइट चाइल्ड मौजूद हैं
+            const hasChildren = node.left || node.right;
+
+            return (
+                <li>
+                    {/* यह नोड (वैल्यू) है */}
+                    <div className="node">{node.value}</div>
+
+                    {/* अगर चाइल्ड हैं, तो एक नई <ul> बनाएं */}
+                    {hasChildren && (
+                        <ul>
+                            {/* लेफ्ट चाइल्ड के लिए TreeNode को फिर से कॉल करें */}
+                            <TreeNode node={node.left} />
+
+                            {/* राइट चाइल्ड के लिए TreeNode को फिर से कॉल करें */}
+                            <TreeNode node={node.right} />
+                        </ul>
+                    )}
+                </li>
+            );
+        }
+
+        // 3. Main App कंपोनेंट
+        function App() {
+            return (
+                <div className="tree">
+                    <ul>
+                        {/* रूट नोड से शुरू करें */}
+                        <TreeNode node={treeData} />
+                    </ul>
+                </div>
+            );
+        }
+
+        // 4. React ऐप को HTML के 'root' div में रेंडर करें
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+    </script>
+
+</body>
+</html>

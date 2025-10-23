@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Matrix Plan</title>
+    </head>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* height: 100vh; */
+            /* display: grid; */
+            /* align-items: center; */
+            /* background-color: aquamarine; */
+            font-family: "Poppins", "sans-sarif";
+        }
+        .heading {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tree-container {
+            overflow-x: auto;
+            padding: 20px;
+            /* border: 2px solid black; */
+            /* white-space: nowrap; */
+            white-space: nowrap;
+            /* margin-left: 200px; */
+        }
+
+        .tree {
+            display: inline-block;
+            /* width: 100%; */
+            /* height: auto; */
+            vertical-align: top;
+            /* text-align: center; */
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            /* transition: 1s; */
+            justify-content: center;
+            padding-left: 0px;
+            display: block;
+            list-style-type: none;
+        }
+
+        .tree li {
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: 1s;
+            vertical-align: top;
+        }
+
+        .tree li::before,
+        .tree li::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50%;
+            border-top: 2px solid black;
+            /* width: 51%; */
+            height: 20px;
+        }
+
+        .tree li::before {
+            right: 50%;
+            border-right: 2px solid black;
+        }
+
+        .tree li::after {
+            /* right: auto; */
+            left: 50%;
+            border-left: 2px solid black;
+        }
+        .tree li:only-child:after,
+        .tree li:only-child:before {
+            display: none;
+        }
+
+        .tree li:first-child::before {
+            border: 0 none;
+        }
+
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        .tree li:last-child::before {
+            border-right: 2px solid black;
+            border-radius: 0 5px 0 0;
+        }
+
+        .tree li:first-child::after {
+            border-left: 2px solid black;
+            border-radius: 5px 0 0 0;
+        }
+
+        .tree > ul > li::before,
+        .tree > ul > li::after {
+            border: 0 none;
+        }
+
+        .tree ul ul::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 2px solid black;
+            width: 0px;
+            height: 20px;
+            transform: translateX(-50%);
+        }
+
+        .tree li a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+            border: 2px solid black;
+            border-radius: 1rem;
+            background: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* .tree li a:hover{
+            color: green;
+        } */
+
+        .tree li img {
+            width: 40px;
+            height: 40px;
+            display: block;
+            margin: 0 auto 5px;
+        }
+    </style>
+    <body>
+        <h1 class="heading">Matrix Plan in MLM</h1>
+
+        <div class="tree-container">
+            <div class="tree">
+                <ul>
+                    <li>
+                        <a href="#"
+                            ><img src="default.png" alt="" /><span
+                                >company</span
+                            ></a
+                        >
+                        <ul>
+                            <li>
+                                <a href="#"
+                                    ><img src="default.png" alt="" /><span
+                                        >pc-1</span
+                                    ></a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-1.1</span></a
+                                        >
+                                        <ul>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-1.1.1</span></a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-1.1.2</span></a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-1.2</span></a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-1.3</span></a
+                                        >
+                                        <ul>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-1.3.1</span></a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-1.3.2</span></a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-1.3.3</span></a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    ><img src="default.png" alt="" /><span
+                                        >pc-2</span
+                                    ></a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-2.1</span></a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-2.2</span></a
+                                        >
+                                        <ul>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-2.2.1</span></a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-2.2.2</span></a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    ><img src="default.png" alt="" /><span
+                                        >pc-3</span
+                                    ></a
+                                >
+                                <ul>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-2.1</span></a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                            ><img
+                                                src="default.png"
+                                                alt=""
+                                            /><span>pc-2.2</span></a
+                                        >
+                                        <ul>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-2.2.1</span></a
+                                                >
+                                            </li>
+                                            <li>
+                                                <a href="#"
+                                                    ><img
+                                                        src="default.png"
+                                                        alt=""
+                                                    /><span>pc-2.2.2</span></a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        console.log("It's started to create the project for matrix project");
+
+        //  const getTreeData = () => {
+        //     return {
+        //         element: "Head Office",
+        //         left: {
+        //             element: "Ravi Sharma",
+        //             left: {
+        //                 element: "Amit Verma",
+        //                 left: {
+        //                     element: "Shivam Tiwari",
+        //                     left: {
+        //                         element: "Deepak Singh",
+        //                         left: { element: "Harshit Yadav" },
+        //                         right: { element: "Anmol Pandey" },
+        //                     },
+        //                     right: {
+        //                         element: "Pankaj Sahu",
+        //                         left: { element: "Kiran Mishra" },
+        //                         right: { element: "Gaurav Dubey" },
+        //                     },
+        //                 },
+        //                 right: {
+        //                     element: "Kartik Jaiswal",
+        //                     left: {
+        //                         element: "Manish Gupta",
+        //                         left: { element: "Rakesh Chauhan" },
+        //                         right: { element: "Abhishek Yadav" },
+        //                     },
+        //                     //     right: {
+        //                     //         element: 'Aayush Patel',
+        //                     //         left: { element: 'Ankit Singh' },
+        //                     //         right: { element: 'Priyanshu Verma' }
+        //                     //     }
+        //                 },
+        //             },
+        //             mid: {
+        //                 element: "Amit Verma",
+        //                 left: {
+        //                     element: "Shivam Tiwari",
+        //                     left: {
+        //                         element: "Deepak Singh",
+        //                         left: { element: "Harshit Yadav" },
+        //                         right: { element: "Anmol Pandey" },
+        //                     },
+        //                     right: {
+        //                         element: "Pankaj Sahu",
+        //                         left: { element: "Kiran Mishra" },
+        //                         right: { element: "Gaurav Dubey" },
+        //                     },
+        //                 },
+        //                 right: {
+        //                     element: "Kartik Jaiswal",
+        //                     left: {
+        //                         element: "Manish Gupta",
+        //                         left: { element: "Rakesh Chauhan" },
+        //                         right: { element: "Abhishek Yadav" },
+        //                     },
+        //                     //     right: {
+        //                     //         element: 'Aayush Patel',
+        //                     //         left: { element: 'Ankit Singh' },
+        //                     //         right: { element: 'Priyanshu Verma' }
+        //                     //     }
+        //                 },
+        //             },
+        //             right: {
+        //                 element: "Neha Srivastava",
+        //                 left: {
+        //                     element: "Shreya Gupta",
+        //                     left: {
+        //                         element: "Komal Tiwari",
+        //                         left: { element: "Ruchi Pandey" },
+        //                         right: { element: "Sonam Singh" },
+        //                     },
+        //                     right: {
+        //                         element: "Pooja Yadav",
+        //                         left: { element: "Megha Sharma" },
+        //                         right: { element: "Swati Gupta" },
+        //                     },
+        //                 },
+        //                 // right: {
+        //                 //     element: 'Akash Dubey',
+        //                 //     left: {
+        //                 //         element: 'Nikhil Verma',
+        //                 //         left: { element: 'Ananya Mishra' },
+        //                 //         right: { element: 'Rohit Kumar' }
+        //                 //     },
+        //                 //     right: {
+        //                 //         element: 'Chirag Agarwal',
+        //                 //         left: { element: 'Simran Patel' },
+        //                 //         right: { element: 'Ritesh Chauhan' }
+        //                 //     }
+        //                 // }
+        //             },
+        //         },
+        //         mid: {
+        //             element: "Adarsh Kumar",
+        //             left: {
+        //                 element: "Arvind Singh",
+        //                 left: {
+        //                     element: "Shubham Patel",
+        //                     left: {
+        //                         element: "Astha Mishra",
+        //                         left: { element: "Alpana Gupta" },
+        //                         mid: { element: "Alpan" },
+        //                         right: { element: "Rashi Yadav" },
+        //                     },
+        //                     mid: {
+        //                         element: "Astha Mishra",
+        //                         left: { element: "Alpana Gupta" },
+        //                         mid: { element: "Alpan" },
+        //                         right: { element: "Rashi Yadav" },
+        //                     },
+        //                     right: {
+        //                         element: "Anjali Verma",
+        //                         left: { element: "Rekha Tiwari" },
+        //                         right: { element: "Keshav Chauhan" },
+        //                     },
+        //                 },
+        //                 //         right: {
+        //                 //             element: 'Rahul Gupta',
+        //                 //             left: {
+        //                 //                 element: 'Mehul Agarwal',
+        //                 //                 left: { element: 'Tanisha Singh' },
+        //                 //                 right: { element: 'Harsh Dubey' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Sakshi Verma',
+        //                 //                 left: { element: 'Devesh Patel' },
+        //                 //                 right: { element: 'Aarav Sharma' }
+        //                 //             }
+        //                 //         }
+        //                 //     },
+        //                 //     right: {
+        //                 //         element: 'Priya Sharma',
+        //                 //         left: {
+        //                 //             element: 'Karan Verma',
+        //                 //             left: {
+        //                 //                 element: 'Divya Singh',
+        //                 //                 left: { element: 'Nidhi Patel' },
+        //                 //                 right: { element: 'Rohini Gupta' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Aditi Dubey',
+        //                 //                 left: { element: 'Tanya Sharma' },
+        //                 //                 right: { element: 'Rajesh Chauhan' }
+        //                 //             }
+        //                 //         },
+        //                 //         right: {
+        //                 //             element: 'Vivek Tiwari',
+        //                 //             left: {
+        //                 //                 element: 'Ayushi Mishra',
+        //                 //                 left: { element: 'Neelam Pandey' },
+        //                 //                 right: { element: 'Aman Kumar' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Anurag Singh',
+        //                 //                 left: { element: 'Dhruv Gupta' },
+        //                 //                 right: { element: 'Reena Verma' }
+        //                 //             }
+        //                 //         }
+        //             },
+        //         },
+        //         right: {
+        //             element: "Adarsh Kumar",
+        //             left: {
+        //                 element: "Arvind Singh",
+        //                 left: {
+        //                     element: "Shubham Patel",
+        //                     left: {
+        //                         element: "Astha Mishra",
+        //                         left: { element: "Alpana Gupta" },
+        //                         right: { element: "Rashi Yadav" },
+        //                     },
+        //                     right: {
+        //                         element: "Anjali Verma",
+        //                         left: { element: "Rekha Tiwari" },
+        //                         mid: { element: "Alpan" },
+        //                         right: { element: "Keshav Chauhan" },
+        //                     },
+        //                 },
+        //                 mid: {
+        //                     element: "Shubham Patel",
+        //                     left: {
+        //                         element: "Astha Mishra",
+        //                         left: { element: "Alpana Gupta" },
+        //                         right: { element: "Rashi Yadav" },
+        //                     },
+        //                     right: {
+        //                         element: "Anjali Verma",
+        //                         left: { element: "Rekha Tiwari" },
+        //                         mid: { element: "Alpan" },
+        //                         right: { element: "Keshav Chauhan" },
+        //                     },
+        //                 },
+        //                 //         right: {
+        //                 //             element: 'Rahul Gupta',
+        //                 //             left: {
+        //                 //                 element: 'Mehul Agarwal',
+        //                 //                 left: { element: 'Tanisha Singh' },
+        //                 //                 right: { element: 'Harsh Dubey' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Sakshi Verma',
+        //                 //                 left: { element: 'Devesh Patel' },
+        //                 //                 right: { element: 'Aarav Sharma' }
+        //                 //             }
+        //                 //         }
+        //                 //     },
+        //                 //     right: {
+        //                 //         element: 'Priya Sharma',
+        //                 //         left: {
+        //                 //             element: 'Karan Verma',
+        //                 //             left: {
+        //                 //                 element: 'Divya Singh',
+        //                 //                 left: { element: 'Nidhi Patel' },
+        //                 //                 right: { element: 'Rohini Gupta' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Aditi Dubey',
+        //                 //                 left: { element: 'Tanya Sharma' },
+        //                 //                 right: { element: 'Rajesh Chauhan' }
+        //                 //             }
+        //                 //         },
+        //                 //         right: {
+        //                 //             element: 'Vivek Tiwari',
+        //                 //             left: {
+        //                 //                 element: 'Ayushi Mishra',
+        //                 //                 left: { element: 'Neelam Pandey' },
+        //                 //                 right: { element: 'Aman Kumar' }
+        //                 //             },
+        //                 //             right: {
+        //                 //                 element: 'Anurag Singh',
+        //                 //                 left: { element: 'Dhruv Gupta' },
+        //                 //                 right: { element: 'Reena Verma' }
+        //                 //             }
+        //                 //         }
+        //             },
+        //         },
+        //     };
+        // };
+
+        const getTreeData = () => {
+    return {
+        element: "Head Office",
+        children: [
+            {
+                element: "Ravi Sharma",
+                children: [
+                    {
+                        element: "Amit Verma",
+                        children: [
+                            {
+                                element: "Shivam Tiwari",
+                                children: [
+                                    {
+                                        element: "Deepak Singh",
+                                        children: [
+                                            { element: "Harshit Yadav" },
+                                            { element: "Anmol Pandey" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Pankaj Sahu",
+                                        children: [
+                                            { element: "Kiran Mishra" },
+                                            { element: "Gaurav Dubey" }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                element: "Kartik Jaiswal",
+                                children: [
+                                    {
+                                        element: "Manish Gupta",
+                                        children: [
+                                            { element: "Rakesh Chauhan" },
+                                            { element: "Abhishek Yadav" }
+                                        ]
+                                    }
+                                    // right: {
+                                    //     element: 'Aayush Patel',
+                                    //     left: { element: 'Ankit Singh' },
+                                    //     right: { element: 'Priyanshu Verma' }
+                                    // }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        element: "Amit Verma",
+                        children: [
+                            {
+                                element: "Shivam Tiwari",
+                                children: [
+                                    {
+                                        element: "Deepak Singh",
+                                        children: [
+                                            { element: "Harshit Yadav" },
+                                            { element: "Anmol Pandey" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Pankaj Sahu",
+                                        children: [
+                                            { element: "Kiran Mishra" },
+                                            { element: "Gaurav Dubey" }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                element: "Kartik Jaiswal",
+                                children: [
+                                    {
+                                        element: "Manish Gupta",
+                                        children: [
+                                            { element: "Rakesh Chauhan" },
+                                            { element: "Abhishek Yadav" }
+                                        ]
+                                    }
+                                    // right: {
+                                    //     element: 'Aayush Patel',
+                                    //     left: { element: 'Ankit Singh' },
+                                    //     right: { element: 'Priyanshu Verma' }
+                                    // }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        element: "Neha Srivastava",
+                        children: [
+                            {
+                                element: "Shreya Gupta",
+                                children: [
+                                    {
+                                        element: "Komal Tiwari",
+                                        children: [
+                                            { element: "Ruchi Pandey" },
+                                            { element: "Sonam Singh" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Pooja Yadav",
+                                        children: [
+                                            { element: "Megha Sharma" },
+                                            { element: "Swati Gupta" }
+                                        ]
+                                    }
+                                ]
+                            }
+                            // right: {
+                            //     element: 'Akash Dubey',
+                            //     left: {
+                            //         element: 'Nikhil Verma',
+                            //         left: { element: 'Ananya Mishra' },
+                            //         right: { element: 'Rohit Kumar' }
+                            //     },
+                            //     right: {
+                            //         element: 'Chirag Agarwal',
+                            //         left: { element: 'Simran Patel' },
+                            //         right: { element: 'Ritesh Chauhan' }
+                            //     }
+                            // }
+                        ]
+                    }
+                ]
+            },
+            {
+                element: "Adarsh Kumar",
+                children: [
+                    {
+                        element: "Arvind Singh",
+                        children: [
+                            {
+                                element: "Shubham Patel",
+                                children: [
+                                    {
+                                        element: "Astha Mishra",
+                                        children: [
+                                            { element: "Alpana Gupta" },
+                                            { element: "Alpan" },
+                                            { element: "Rashi Yadav" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Astha Mishra",
+                                        children: [
+                                            { element: "Alpana Gupta" },
+                                            { element: "Alpan" },
+                                            { element: "Rashi Yadav" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Anjali Verma",
+                                        children: [
+                                            { element: "Rekha Tiwari" },
+                                            { element: "Keshav Chauhan" }
+                                        ]
+                                    }
+                                ]
+                            }
+                            // right: {
+                            //     element: 'Rahul Gupta',
+                            //     left: {
+                            //         element: 'Mehul Agarwal',
+                            //         left: { element: 'Tanisha Singh' },
+                            //         right: { element: 'Harsh Dubey' }
+                            //     },
+                            //     right: {
+                            //         element: 'Sakshi Verma',
+                            //         left: { element: 'Devesh Patel' },
+                            //         right: { element: 'Aarav Sharma' }
+                            //     }
+                            // }
+                            // right: {
+                            //     element: 'Priya Sharma',
+                            //     left: {
+                            //         element: 'Karan Verma',
+                            //         left: {
+                            //             element: 'Divya Singh',
+                            //             left: { element: 'Nidhi Patel' },
+                            //             right: { element: 'Rohini Gupta' }
+                            //         },
+                            //         right: {
+                            //             element: 'Aditi Dubey',
+                            //             left: { element: 'Tanya Sharma' },
+                            //             right: { element: 'Rajesh Chauhan' }
+                            //         }
+                            //     },
+                            //     right: {
+                            //         element: 'Vivek Tiwari',
+                            //         left: {
+                            //             element: 'Ayushi Mishra',
+                            //             left: { element: 'Neelam Pandey' },
+                            //             right: { element: 'Aman Kumar' }
+                            //         },
+                            //         right: {
+                            //             element: 'Anurag Singh',
+                            //             left: { element: 'Dhruv Gupta' },
+                            //             right: { element: 'Reena Verma' }
+                            //         }
+                            //     }
+                            // }
+                        ]
+                    }
+                ]
+            },
+            {
+                element: "Adarsh Kumar",
+                children: [
+                    {
+                        element: "Arvind Singh",
+                        children: [
+                            {
+                                element: "Shubham Patel",
+                                children: [
+                                    {
+                                        element: "Astha Mishra",
+                                        children: [
+                                            { element: "Alpana Gupta" },
+                                            { element: "Rashi Yadav" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Anjali Verma",
+                                        children: [
+                                            { element: "Rekha Tiwari" },
+                                            { element: "Alpan" },
+                                            { element: "Keshav Chauhan" }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                element: "Shubham Patel",
+                                children: [
+                                    {
+                                        element: "Astha Mishra",
+                                        children: [
+                                            { element: "Alpana Gupta" },
+                                            { element: "Rashi Yadav" }
+                                        ]
+                                    },
+                                    {
+                                        element: "Anjali Verma",
+                                        children: [
+                                            { element: "Rekha Tiwari" },
+                                            { element: "Alpan" },
+                                            { element: "Keshav Chauhan" }
+                                        ]
+                                    }
+                                ]
+                            }
+                            // right: {
+                            //     element: 'Rahul Gupta',
+                            //     left: {
+                            //         element: 'Mehul Agarwal',
+                            //         left: { element: 'Tanisha Singh' },
+                            //         right: { element: 'Harsh Dubey' }
+                            //     },
+                            //     right: {
+                            //         element: 'Sakshi Verma',
+                            //         left: { element: 'Devesh Patel' },
+                            //         right: { element: 'Aarav Sharma' }
+                            //     }
+                            // }
+                            // right: {
+                            //     element: 'Priya Sharma',
+                            //     left: {
+                            //         element: 'Karan Verma',
+                            //         left: {
+                            //             element: 'Divya Singh',
+                            //             left: { element: 'Nidhi Patel' },
+                            //             right: { element: 'Rohini Gupta' }
+                            //         },
+                            //         right: {
+                            //             element: 'Aditi Dubey',
+                            //             left: { element: 'Tanya Sharma' },
+                            //             right: { element: 'Rajesh Chauhan' }
+                            //         }
+                            //     },
+                            //     right: {
+                            //         element: 'Vivek Tiwari',
+                            //         left: {
+                            //             element: 'Ayushi Mishra',
+                            //             left: { element: 'Neelam Pandey' },
+                            //             right: { element: 'Aman Kumar' }
+                            //         },
+                            //         right: {
+                            //             element: 'Anurag Singh',
+                            //             left: { element: 'Dhruv Gupta' },
+                            //             right: { element: 'Reena Verma' }
+                            //         }
+                            //     }
+                            // }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+};
+
+
+        const renderNodeContent = (node)=>{
+            if(!node){
+                return "";
+            }
+
+            const {element,children} = node;
+
+            return`
+
+            `;
+        }
+    </script>
+</html>

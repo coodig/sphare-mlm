@@ -67,17 +67,46 @@
         @csrf
 
         {{-- Email --}}
-        <div>
+        {{-- <div>
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input type="email" id="email" name="email" required autofocus
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-        </div>
+               @error('email')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+        </div> --}}
+        <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email"
+               value="{{ old('email') }}"
+               required autofocus
+               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
+                      @error('email')
+                          border-red-500 focus:ring-red-500 focus:border-red-500
+                      @else
+                          border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                      @enderror">
+
+        {{-- यह 'email' फ़ील्ड से जुड़ी एरर को यहाँ दिखाएगा --}}
+        @error('email')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
 
         {{-- Password --}}
         <div>
             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-            <input type="password" id="password" name="password" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            <input type="password" id="password" name="password" required autofocus
+                class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
+                @error('password')
+                    border-red-500 focus:ring-red-500 focus:border-red-500
+                @else
+            border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                @enderror">
+
+            @error('password')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
         </div>
 
         {{-- Login Button --}}

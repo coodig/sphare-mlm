@@ -7,6 +7,7 @@ use App\Http\Controllers\Pages\FAQsController;
 use App\Http\Controllers\Pages\PrivacyController;
 use App\Http\Controllers\Pages\TermsAndConditionController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\EWalletController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\SettingController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::prefix('/u/{username}')->group(function(){
     Route::post('/profile/update',[ProfileController::class,'update'])->name('profile.update');
 
     Route::get('/setting',[SettingController::class,'show'])->name('setting');
+
+    Route::get('/e-wallet',[EWalletController::class,'show'])->name('e-wallet');
 });
 
 

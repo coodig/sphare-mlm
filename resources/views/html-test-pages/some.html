@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Binary Tree with Image</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                height: 100vh;
+                display: grid;
+                align-items: center;
+                background-color: #e3f2fd; /* light blue background */
+                font-family: "Poppins", sans-serif;
+                /* overflow-x: auto; */
+            }
+
+            .tree {
+                width: 100%;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                /* align-items: flex-start; */
+                /* overflow-x: auto; */
+                   /* min-height: 100vh; */
+            }
+
+            .tree ul {
+                padding: 20px;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .tree li {
+                display: inline-table;
+                text-align: center;
+                list-style-type: none;
+                position: relative;
+                padding: 10px;
+                transition: 0.5s;
+            }
+
+            /* connecting lines between nodes */
+            .tree li::before,
+            .tree li::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 50%;
+                border-top: 2px solid #007bff;
+                width: 51%;
+                height: 10px;
+            }
+
+            .tree li::after {
+                right: auto;
+                left: 50%;
+                border-left: 2px solid #007bff;
+            }
+
+            .tree li:only-child::after,
+            .tree li:only-child::before {
+                display: none;
+            }
+
+            .tree li:only-child {
+                padding-top: 0;
+            }
+
+            .tree li:first-child::before,
+            .tree li:last-child::after {
+                border: 0 none;
+            }
+
+            .tree li:last-child::before {
+                border-right: 2px solid #007bff;
+                border-radius: 0 5px 0 0;
+            }
+
+            .tree li:first-child::after {
+                border-radius: 5px 0 0 0;
+            }
+
+            .tree ul ul::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                border-left: 2px solid #007bff;
+                height: 20px;
+            }
+
+            .tree a {
+                border: 2px solid #007bff;
+                padding: 10px;
+                display: inline-grid;
+                border-radius: 1rem;
+                text-decoration: none;
+                background-color: white;
+                transition: 0.4s;
+            }
+
+            .tree a img {
+                width: 30px;
+                height: 30px;
+                margin-bottom: 10px !important;
+                border-radius: 1rem;
+                margin: auto;
+            }
+
+            .tree a span {
+                border-radius: 5px;
+                border: 2px solid #007bff;
+                color: #004e9a;
+                background-color: #e3f2fd;
+                padding: 5px;
+                font-size: 12px;
+                text-transform: uppercase;
+                /* letter-spacing: 1px; */
+                font-weight: 500;
+            }
+
+            /* hover effects */
+            .tree li a:hover,
+            .tree li a:hover img,
+            .tree li a:hover span,
+            .tree li a:hover + ul li a {
+                background-color: #007bff;
+                color: white;
+                border: 2px solid #004e9a;
+                box-shadow: 0px 0px 8px -2px #004e9a;
+            }
+
+            .tree li a:hover + ul li::after,
+            .tree li a:hover + ul li::before,
+            .tree li a:hover + ul::before,
+            .tree li a:hover + ul ul::before {
+                border-color: #004e9a;
+            }
+
+            h1 {
+                text-align: center;
+                font-weight: 600;
+                color: #004e9a;
+                /* letter-spacing: 1px; */
+            }
+            .toggle-btn {
+                margin-right: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 2px 6px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Binary Tree with Image</h1>
+        <div class="tree">
+            <!-- <ul>
+            <li><a href="#"><img src="default.png" alt=""><span>Root</span></a>
+                <ul>
+                    <li><a href="#"><img src="default.png" alt=""><span>Left Child</span></a>
+                        <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Left Grandchild</span></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Right Grandchild</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><img src="default.png" alt=""><span>Right Child</span></a>
+                        <ul>
+                            <li><a href="#"><img src="default.png" alt=""><span>Left Grandchild</span></a></li>
+                            <li><a href="#"><img src="default.png" alt=""><span>Right Grandchild</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+        </div>
+    </body>
+
+    <script>
+        console.log("yes");
+
+        const getTreeData = () => {
+            return {
+                element: "Head Office",
+                left: {
+                    element: "Ravi Sharma",
+                    left: {
+                        element: "Amit Verma",
+                        left: {
+                            element: "Shivam Tiwari",
+                            left: {
+                                element: "Deepak Singh",
+                                left: { element: "Harshit Yadav" },
+                                right: { element: "Anmol Pandey" },
+                            },
+                            right: {
+                                element: "Pankaj Sahu",
+                                left: { element: "Kiran Mishra" },
+                                right: { element: "Gaurav Dubey" },
+                            },
+                        },
+                        right: {
+                            element: "Kartik Jaiswal",
+                            left: {
+                                element: "Manish Gupta",
+                                left: { element: "Rakesh Chauhan" },
+                                right: { element: "Abhishek Yadav" },
+                            },
+                            //     right: {
+                            //         element: 'Aayush Patel',
+                            //         left: { element: 'Ankit Singh' },
+                            //         right: { element: 'Priyanshu Verma' }
+                            //     }
+                        },
+                    },
+                    right: {
+                        element: "Neha Srivastava",
+                        left: {
+                            element: "Shreya Gupta",
+                            left: {
+                                element: "Komal Tiwari",
+                                left: { element: "Ruchi Pandey" },
+                                right: { element: "Sonam Singh" },
+                            },
+                            right: {
+                                element: "Pooja Yadav",
+                                left: { element: "Megha Sharma" },
+                                right: { element: "Swati Gupta" },
+                            },
+                        },
+                        // right: {
+                        //     element: 'Akash Dubey',
+                        //     left: {
+                        //         element: 'Nikhil Verma',
+                        //         left: { element: 'Ananya Mishra' },
+                        //         right: { element: 'Rohit Kumar' }
+                        //     },
+                        //     right: {
+                        //         element: 'Chirag Agarwal',
+                        //         left: { element: 'Simran Patel' },
+                        //         right: { element: 'Ritesh Chauhan' }
+                        //     }
+                        // }
+                    },
+                },
+                right: {
+                    element: "Adarsh Kumar",
+                    left: {
+                        element: "Arvind Singh",
+                        left: {
+                            element: "Shubham Patel",
+                            left: {
+                                element: "Astha Mishra",
+                                left: { element: "Alpana Gupta" },
+                                right: { element: "Rashi Yadav" },
+                            },
+                            right: {
+                                element: "Anjali Verma",
+                                left: { element: "Rekha Tiwari" },
+                                right: { element: "Keshav Chauhan" },
+                            },
+                        },
+                        //         right: {
+                        //             element: 'Rahul Gupta',
+                        //             left: {
+                        //                 element: 'Mehul Agarwal',
+                        //                 left: { element: 'Tanisha Singh' },
+                        //                 right: { element: 'Harsh Dubey' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Sakshi Verma',
+                        //                 left: { element: 'Devesh Patel' },
+                        //                 right: { element: 'Aarav Sharma' }
+                        //             }
+                        //         }
+                        //     },
+                        //     right: {
+                        //         element: 'Priya Sharma',
+                        //         left: {
+                        //             element: 'Karan Verma',
+                        //             left: {
+                        //                 element: 'Divya Singh',
+                        //                 left: { element: 'Nidhi Patel' },
+                        //                 right: { element: 'Rohini Gupta' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Aditi Dubey',
+                        //                 left: { element: 'Tanya Sharma' },
+                        //                 right: { element: 'Rajesh Chauhan' }
+                        //             }
+                        //         },
+                        //         right: {
+                        //             element: 'Vivek Tiwari',
+                        //             left: {
+                        //                 element: 'Ayushi Mishra',
+                        //                 left: { element: 'Neelam Pandey' },
+                        //                 right: { element: 'Aman Kumar' }
+                        //             },
+                        //             right: {
+                        //                 element: 'Anurag Singh',
+                        //                 left: { element: 'Dhruv Gupta' },
+                        //                 right: { element: 'Reena Verma' }
+                        //             }
+                        //         }
+                    },
+                },
+            };
+        };
+
+        // const renderNodeContent = (node) => {
+        //     if (!node) {
+        //         return "";
+        //     }
+        //     const { element, left, right } = node;
+
+        //     return `
+        // <div class="node__element">${element}</div>
+        // ${
+        //     left || right
+        //         ? `
+        // <div class="node__bottom-line"></div>
+        // <div class="node__children">
+        //     ${left ? `<div class="node">${renderNodeContent(left)}</div>` : ""}
+        //     ${
+        //         right
+        //             ? `<div class="node">${renderNodeContent(right)}</div>`
+        //             : ""
+        //     }
+        //     </div>
+        //     `
+        //         : ""
+        // }
+        // `;
+        // };
+
+        const renderNodeContent = (node) => {
+            if (!node) return "";
+
+            const { element, left, right, image } = node;
+            // <ul>
+
+            return `
+            <li>
+                <a href="#">
+                    <img src="${image || "default.png"}" alt="">
+                    <span>${element}</span>
+                </a>
+                ${
+                    left || right
+                        ? `
+                         <button class="toggle-btn" onclick="toggleNode(this)">-</button>
+                            <ul>
+                                ${left ? renderNodeContent(left) : ""}
+                                ${right ? renderNodeContent(right) : ""}
+                            </ul>
+                          `
+                        : ""
+                }
+            </li>
+            `;
+        };
+        // </ul>
+
+        function toggleNode(btn) {
+            const ul = btn.parentElement.querySelector("ul");
+            if (!ul) return;
+            if (ul.style.display === "none") {
+                ul.style.display = "block";
+                btn.textContent = "-"; // minus sign for collapse
+            } else {
+                ul.style.display = "none";
+                btn.textContent = "+"; // plus sign for expand
+            }
+        }
+
+        const main = () => {
+            const root = getTreeData();
+            const treeDOMElement = document.querySelector(".tree");
+            treeDOMElement.innerHTML = `<ul>${renderNodeContent(root)}</ul>`;
+
+            //  treeContainer.innerHTML = `<ul>${renderNodeContent(root)}</ul>`;
+            // treeDOMElement.innerHTML = `
+            //     <div class="node node--root">
+            //         ${renderNodeContent(rootNodeData)}
+            //     </div>
+            //     `;
+            // treeContainer.innerHTML = `<ul>${renderNodeContent(root)}</ul>`;
+        };
+
+        main();
+    </script>
+</html>

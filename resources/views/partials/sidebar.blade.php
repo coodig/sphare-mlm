@@ -181,7 +181,7 @@
                         {{-- ## Financials Section --}}
                         <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Financials</p>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('e-wallet',['username'=> Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Wallet Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

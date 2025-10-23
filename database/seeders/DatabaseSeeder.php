@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
          $this->call(StatusSeeder::class);
+         $this->call(MlmPlanSeeder::class);
     }
 }
