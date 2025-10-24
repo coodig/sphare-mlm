@@ -22,8 +22,10 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'role',
-        'sponsor_id'
+        'role_id',
+        'status_id',
+        'sponsor_id',
+        'referral_code'
     ];
 
     /**

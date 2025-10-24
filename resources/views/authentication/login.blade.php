@@ -76,7 +76,7 @@
         @enderror
         </div> --}}
         <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email<span class="text-red-500 text-lg ml-1">*</span></label>
         <input type="email" id="email" name="email"
                value="{{ old('email') }}"
                required autofocus
@@ -95,7 +95,7 @@
 
         {{-- Password --}}
         <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password<span class="text-red-500 text-lg ml-1">*</span></label>
             <input type="password" id="password" name="password" required autofocus
                 class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
                 @error('password')
@@ -116,6 +116,26 @@
                 Login
             </button>
         </div>
+
+      <div class="flex items-center justify-between">
+    <div class="flex items-center">
+        <input
+            id="remember_me"
+            name="remember_me"
+            type="checkbox"
+            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+        >
+        <label for="remember_me" class="ml-2 block text-sm text-gray-700">
+            Remember me
+        </label>
+    </div>
+
+    <div class="text-sm">
+        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+            Forgot your password?
+        </a>
+    </div>
+</div>
 
         {{-- Register Link --}}
         <div class="text-center text-sm gap-2">

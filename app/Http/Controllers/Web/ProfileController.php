@@ -11,6 +11,7 @@ class ProfileController extends Controller
     public function show($username)
     {
         $user = Auth::user();
+
         if (!$user || $user->username !== $username) {
             abort(403, 'Unauthorized access');
         }

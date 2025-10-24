@@ -75,7 +75,7 @@
                                 d="m960 120l832 416v1040l-832 415l-832-415V536zm625 456L960 264L719 384l621 314zM960 888l238-118l-622-314l-241 120zM256 680v816l640 320v-816zm768 1136l640-320V680l-640 320z" />
                         </svg><span>Products</span></a></li>
 
-                <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Connect</p>
+                {{-- <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Connect</p>
                 <li><a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -84,10 +84,11 @@
                                     d="M18 15V9c0-2.828 0-4.243-.879-5.121C16.243 3 14.828 3 12 3H8c-2.828 0-4.243 0-5.121.879C2 4.757 2 6.172 2 9v6c0 2.828 0 4.243.879 5.121C3.757 21 5.172 21 8 21h12M6 8h8m-8 4h8m-8 4h4" />
                                 <path d="M18 8h1c1.414 0 2.121 0 2.56.44c.44.439.44 1.146.44 2.56v8a2 2 0 1 1-4 0z" />
                             </g>
-                        </svg><span>Blog / News</span></a></li>
+                        </svg><span>Blog / News</span></a></li> --}}
 
                 <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Support</p>
-                <li><a href="{{ route('contact-us') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
+                <li><a href="{{ route('contact-us') }}"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path
@@ -97,13 +98,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 6H2.5M5 12H2.5M5 18H2.5" />
                             </g>
                         </svg><span>Contact Us</span></a></li>
-                        <li>
-                <a href="{{ route('about-us') }}" class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                    {{-- Add User Icon --}}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" fill-rule="evenodd" d="M256 42.667C138.18 42.667 42.667 138.179 42.667 256c0 117.82 95.513 213.334 213.333 213.334c117.822 0 213.334-95.513 213.334-213.334S373.822 42.667 256 42.667m0 384c-94.105 0-170.666-76.561-170.666-170.667S161.894 85.334 256 85.334c94.107 0 170.667 76.56 170.667 170.666S350.107 426.667 256 426.667m26.714-256c0 15.468-11.262 26.667-26.497 26.667c-15.851 0-26.837-11.2-26.837-26.963c0-15.15 11.283-26.37 26.837-26.37c15.235 0 26.497 11.22 26.497 26.666m-48 64h42.666v128h-42.666z"/></svg>
-                    <span>About Us</span>
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('about-us') }}"
+                        class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
+                        {{-- Add User Icon --}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M256 42.667C138.18 42.667 42.667 138.179 42.667 256c0 117.82 95.513 213.334 213.333 213.334c117.822 0 213.334-95.513 213.334-213.334S373.822 42.667 256 42.667m0 384c-94.105 0-170.666-76.561-170.666-170.667S161.894 85.334 256 85.334c94.107 0 170.667 76.56 170.667 170.666S350.107 426.667 256 426.667m26.714-256c0 15.468-11.262 26.667-26.497 26.667c-15.851 0-26.837-11.2-26.837-26.963c0-15.15 11.283-26.37 26.837-26.37c15.235 0 26.497 11.22 26.497 26.666m-48 64h42.666v128h-42.666z" />
+                        </svg>
+                        <span>About Us</span>
+                    </a>
+                </li>
                 <li><a href="{{ route('faqs') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
                             <path fill="currentColor"
@@ -139,6 +144,23 @@
                                     </g>
                                 </svg>
                                 <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('products', ['username' => Auth::user()->username]) }}"
+                                class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
+                                {{-- नया आइकन --}}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5">
+                                        <path d="M16.5 9.4L7.5 4.6" />
+                                        <path
+                                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                        <path d="M3.27 6.96L12 12.01l8.73-5.05" />
+                                        <path d="M12 22.08V12" />
+                                    </g>
+                                </svg>
+                                <span>Products</span>
                             </a>
                         </li>
 
@@ -181,7 +203,7 @@
                         {{-- ## Financials Section --}}
                         <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Financials</p>
                         <li>
-                            <a href="{{ route('e-wallet',['username'=> Auth::user()->username]) }}"
+                            <a href="{{ route('e-wallet', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Wallet Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

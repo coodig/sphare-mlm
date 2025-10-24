@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Log In')
+@section('title', 'Register')
 
 @section('content')
     {{-- Form Header --}}
@@ -8,7 +8,7 @@
         <h2 class="text-3xl font-extrabold text-gray-900">
             Create Your Account
         </h2>
-        <p class="mt-1.5 text-sm text-gray-600">
+        <p class="mb-2 text-sm text-gray-600">
             Start your journey with us!
         </p>
     </div>
@@ -24,34 +24,64 @@
             <input type="text" id="sponsor_id" name="sponsor_id" value="{{ request('sponsor_id') }}"
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 autocomplete="sponsor_id" placeholder="Enter Sponsor ID (if you have one)">
+            {{-- @error('username')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror --}}
         </div>
 
         <div>
-            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <label for="username" class="block text-sm font-medium text-gray-700">Username<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
             <input type="text" id="username" name="username" required autofocus
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 autocomplete="username" placeholder="Enter your username">
+            @error('username')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
             <input type="email" id="email" name="email" required
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 autocomplete="email" placeholder="Enter your email">
+            @error('email')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- Password --}}
         <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
             <input type="password" id="password" name="password" required
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 autocomplete="new-password" placeholder="Enter your password">
+            @error('password')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
 
         <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
             <input type="password" id="password_confirmation" name="password_confirmation" required
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 autocomplete="new-password" placeholder="Enter your password again">
+            @error('password_confirmation')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="flex items-center">
+            <input id="terms" name="terms" type="checkbox" required
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                I agree to the
+                <a href="{{route('terms-and-condition')}}" class="font-medium text-blue-600 hover:text-blue-500">
+                    Terms and Conditions
+                </a>
+            </label>
         </div>
 
         {{-- Login Button --}}
