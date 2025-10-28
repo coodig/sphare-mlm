@@ -20,10 +20,11 @@
         {{-- Email --}}
 
         <div>
-            <label for="sponsor_id" class="block text-sm font-medium text-gray-700">Sponsor ID (Optional)</label>
-            <input type="text" id="sponsor_id" name="sponsor_id" value="{{ request('sponsor_id') }}"
+            <label for="referral_code" class="block text-sm font-medium text-gray-700">Referral Code (Optional)</label>
+            {{-- <input type="text" id="referral_code" name="referral_code" value="{{ request('referral_code') }}" --}}
+            <input type="text" id="referral_code" name="referral_code"
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                autocomplete="sponsor_id" placeholder="Enter Sponsor ID (if you have one)">
+                autocomplete="referral_code" placeholder="Enter Referral Code  (if you have one)">
             {{-- @error('username')
             <span class="text-red-500">{{ $message }}</span>
             @enderror --}}
@@ -91,6 +92,7 @@
                 Register
             </button>
         </div>
+
 
         {{-- Register Link --}}
         <div class="text-center text-sm gap-2">

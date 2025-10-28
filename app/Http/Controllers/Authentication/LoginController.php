@@ -18,7 +18,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard', ['username' => Auth::user()->username])->with('success', 'Welcome in SPHARE MLM,' . Auth::user()->username . '!');
+            return redirect()->route('dashboard', ['username' => Auth::user()->username])->with('success', 'Welcome to SPHARE MLM, ' . ucfirst(Auth::user()->username) . ' ! We’re glad to have you back.');
         }
 
         return back()->withErrors([

@@ -161,7 +161,7 @@
                     {{-- <li><a href="#" class="hover:text-blue-600 transition-colors">About Us</a></li> --}}
                     <li><a href="#" class="hover:text-blue-600 transition-colors">Business Plan</a></li>
                     <li><a href="#" class="hover:text-blue-600 transition-colors">Packages</a></li>
-                    <li><a href="#" class="hover:text-blue-600 transition-colors">Testimonials</a></li>
+                    <li><a href="{{ route('testimonials') }}" class="hover:text-blue-600 transition-colors">Testimonials</a></li>
                 </ul>
 
             </div>

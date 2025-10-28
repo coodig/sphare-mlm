@@ -1,52 +1,3 @@
-{{-- @extends('layouts.auth')
-@section('title', 'Log In')
-
-@section('content')
-<div class="w-full sm:max-w-md bg-white p-8 rounded-lg shadow-xl border border-gray-200">
-    <div class="text-center mb-6">
-
-        <a href="/" class="block text-3xl font-bold text-blue-600">
-            SphareMLM
-        </a>
-        <h2 class="mt-4 text-2xl font-semibold text-gray-800">
-            Log In Your Account
-        </h2>
-        <p class="text-gray-500 text-sm">Start your journey with us!</p>
-    </div>
-
-
-    <form method="POST" action="#">
-        @csrf
-
-
-        <div class="mb-4">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autofocus autocomplete="email" placeholder="Enter your email">
-        </div>
-        <div class="mb-4">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" autofocus autocomplete="password"
-                placeholder="Enter your password">
-        </div>
-        <div class="mb-4">
-            <label for="password_confirmation">Password Confirmation</label>
-            <input type="password_confirmation" id="password_confirmation" name="password_confirmation" autofocus
-                autocomplete="password_confirmation" placeholder="Enter your password_confirmation">
-        </div>
-
-        <div class="mb-4">
-            <button type="submit">Login</button>
-        </div>
-
-        <div class="mb-4">
-            <p>Not Register yet?<a href="{{ route('register') }}"><span>Register</span></a></p>
-        </div>
-
-    </form>
-</div>
-@endsection --}}
-
-
 @extends('layouts.auth')
 
 @section('title', 'Log In')
@@ -57,9 +8,15 @@
         <h2 class="text-3xl font-extrabold text-gray-900">
             Log In Your Account
         </h2>
-        <p class="mt-1.5 text-sm text-gray-600">
+        <p class="mt-1.5 text-sm text-gray-600 mb-2">
             Start your journey with us!
         </p>
+        @if (session('success'))
+            {{-- Display the message in a styled alert box --}}
+            <div id="success-alert" class="mb-4 rounded-lg bg-green-100 p-4 text-sm text-green-700" role="alert">
+                <span class="font-semibold">{{ session('success') }}</span>
+            </div>
+        @endif
     </div>
 
     {{-- Login Form --}}
@@ -71,42 +28,58 @@
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input type="email" id="email" name="email" required autofocus
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-               @error('email')
+            @error('email')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-        @enderror
+            @enderror
         </div> --}}
         <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Email<span class="text-red-500 text-lg ml-1">*</span></label>
-        <input type="email" id="email" name="email"
-               value="{{ old('email') }}"
-               required autofocus
-               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
-                      @error('email')
-                          border-red-500 focus:ring-red-500 focus:border-red-500
-                      @else
-                          border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                      @enderror">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
+                              {{-- @error('email')
+                                  border-red-500 focus:ring-red-500 focus:border-red-500
+                              @else
+                                  border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                              @enderror --}}
+                              ">
 
-        {{-- यह 'email' फ़ील्ड से जुड़ी एरर को यहाँ दिखाएगा --}}
-        @error('email')
-            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div>
+            {{-- यह 'email' फ़ील्ड से जुड़ी एरर को यहाँ दिखाएगा --}}
+            @error('email')
+                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
 
         {{-- Password --}}
         <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">Password<span class="text-red-500 text-lg ml-1">*</span></label>
-            <input type="password" id="password" name="password" required autofocus
-                class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
-                @error('password')
-                    border-red-500 focus:ring-red-500 focus:border-red-500
-                @else
-            border-gray-300 focus:ring-blue-500 focus:border-blue-500
-                @enderror">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password<span
+                    class="text-red-500 text-lg ml-1">*</span></label>
+            <input type="password" id="password" name="password" required autofocus class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm
+                        {{-- @error('password')
+                            border-red-500 focus:ring-red-500 focus:border-red-500
+                        @else
+                    border-gray-300 focus:ring-blue-500 focus:border-blue-500
+                        @enderror --}}
+                        ">
 
             @error('password')
                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
             @enderror
+        </div>
+
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <input id="remember_me" name="remember_me" type="checkbox" required
+                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer">
+                <label for="remember_me" class="ml-2 block text-sm text-gray-700">
+                    Remember me
+                </label>
+            </div>
+
+            <div class="text-sm">
+                <a href="{{ route('forget-password') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                    Forgot your password?
+                </a>
+            </div>
         </div>
 
         {{-- Login Button --}}
@@ -116,26 +89,6 @@
                 Login
             </button>
         </div>
-
-      <div class="flex items-center justify-between">
-    <div class="flex items-center">
-        <input
-            id="remember_me"
-            name="remember_me"
-            type="checkbox"
-            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-        >
-        <label for="remember_me" class="ml-2 block text-sm text-gray-700">
-            Remember me
-        </label>
-    </div>
-
-    <div class="text-sm">
-        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
-            Forgot your password?
-        </a>
-    </div>
-</div>
 
         {{-- Register Link --}}
         <div class="text-center text-sm gap-2">
@@ -162,30 +115,49 @@
             </button>
         </div>
         <div>
-    <button type="submit"
-        class="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 hover:ring-black cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="mr-2">
-            <path fill="currentColor"
-                d="M16.24 22a1 1 0 0 1-1-1v-2.6a2.15 2.15 0 0 0-.54-1.66a1 1 0 0 1 .61-1.67C17.75 14.78 20 14 20 9.77a4 4 0 0 0-.67-2.22a2.75 2.75 0 0 1-.41-2.06a3.7 3.7 0 0 0 0-1.41a7.7 7.7 0 0 0-2.09 1.09a1 1 0 0 1-.84.15a10.15 10.15 0 0 0-5.52 0a1 1 0 0 1-.84-.15a7.4 7.4 0 0 0-2.11-1.09a3.5 3.5 0 0 0 0 1.41a2.84 2.84 0 0 1-.43 2.08a4.07 4.07 0 0 0-.67 2.23c0 3.89 1.88 4.93 4.7 5.29a1 1 0 0 1 .82.66a1 1 0 0 1-.21 1a2.06 2.06 0 0 0-.55 1.56V21a1 1 0 0 1-2 0v-.57a6 6 0 0 1-5.27-2.09a3.9 3.9 0 0 0-1.16-.88a1 1 0 1 1 .5-1.94a4.9 4.9 0 0 1 2 1.36c1 1 2 1.88 3.9 1.52a3.9 3.9 0 0 1 .23-1.58c-2.06-.52-5-2-5-7a6 6 0 0 1 1-3.33a.85.85 0 0 0 .13-.62a5.7 5.7 0 0 1 .33-3.21a1 1 0 0 1 .63-.57c.34-.1 1.56-.3 3.87 1.2a12.16 12.16 0 0 1 5.69 0c2.31-1.5 3.53-1.31 3.86-1.2a1 1 0 0 1 .63.57a5.7 5.7 0 0 1 .33 3.22a.75.75 0 0 0 .11.57a6 6 0 0 1 1 3.34c0 5.07-2.92 6.54-5 7a4.3 4.3 0 0 1 .22 1.67V21a1 1 0 0 1-.94 1" />
-        </svg>
-        <span>Login with Github</span>
-    </button>
-</div>
-<div>
-    <button type="submit"
-        class="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:ring-blue-500 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="mr-2">
-            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
-                <path stroke-dasharray="24" stroke-dashoffset="24" d="M17 4l-2 0c-2.5 0 -4 1.5 -4 4v12">
-                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0" />
-                </path>
-                <path stroke-dasharray="8" stroke-dashoffset="8" d="M8 12h7">
-                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.2s" values="8;0" />
-                </path>
-            </g>
-        </svg>
-        <span>Login with Facebook</span>
-    </button>
-</div>
+            <button type="submit"
+                class="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 hover:ring-black cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="mr-2">
+                    <path fill="currentColor"
+                        d="M16.24 22a1 1 0 0 1-1-1v-2.6a2.15 2.15 0 0 0-.54-1.66a1 1 0 0 1 .61-1.67C17.75 14.78 20 14 20 9.77a4 4 0 0 0-.67-2.22a2.75 2.75 0 0 1-.41-2.06a3.7 3.7 0 0 0 0-1.41a7.7 7.7 0 0 0-2.09 1.09a1 1 0 0 1-.84.15a10.15 10.15 0 0 0-5.52 0a1 1 0 0 1-.84-.15a7.4 7.4 0 0 0-2.11-1.09a3.5 3.5 0 0 0 0 1.41a2.84 2.84 0 0 1-.43 2.08a4.07 4.07 0 0 0-.67 2.23c0 3.89 1.88 4.93 4.7 5.29a1 1 0 0 1 .82.66a1 1 0 0 1-.21 1a2.06 2.06 0 0 0-.55 1.56V21a1 1 0 0 1-2 0v-.57a6 6 0 0 1-5.27-2.09a3.9 3.9 0 0 0-1.16-.88a1 1 0 1 1 .5-1.94a4.9 4.9 0 0 1 2 1.36c1 1 2 1.88 3.9 1.52a3.9 3.9 0 0 1 .23-1.58c-2.06-.52-5-2-5-7a6 6 0 0 1 1-3.33a.85.85 0 0 0 .13-.62a5.7 5.7 0 0 1 .33-3.21a1 1 0 0 1 .63-.57c.34-.1 1.56-.3 3.87 1.2a12.16 12.16 0 0 1 5.69 0c2.31-1.5 3.53-1.31 3.86-1.2a1 1 0 0 1 .63.57a5.7 5.7 0 0 1 .33 3.22a.75.75 0 0 0 .11.57a6 6 0 0 1 1 3.34c0 5.07-2.92 6.54-5 7a4.3 4.3 0 0 1 .22 1.67V21a1 1 0 0 1-.94 1" />
+                </svg>
+                <span>Login with Github</span>
+            </button>
+        </div>
+        <div>
+            <button type="submit"
+                class="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-2xl shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:ring-blue-500 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="mr-2">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                        <path stroke-dasharray="24" stroke-dashoffset="24" d="M17 4l-2 0c-2.5 0 -4 1.5 -4 4v12">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0" />
+                        </path>
+                        <path stroke-dasharray="8" stroke-dashoffset="8" d="M8 12h7">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.2s" values="8;0" />
+                        </path>
+                    </g>
+                </svg>
+                <span>Login with Facebook</span>
+            </button>
+        </div>
     </form>
+
+    @push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const alertBox = document.getElementById('success-alert');
+
+            if (alertBox) {
+                setTimeout(() => {
+                    alertBox.style.transition = 'opacity 0.5s ease';
+                    alertBox.style.opacity = '0';
+
+                    setTimeout(() => alertBox.style.display ='none', 500);
+                }, 5000);
+            }
+        });
+    </script>
+
+@endpush
+
 @endsection

@@ -53,7 +53,7 @@
                 </li>
                 </li>
                 <li>
-                    <a href="/"
+                    <a href="{{ route('testimonials')  }}"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                         {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -68,12 +68,12 @@
                     </a>
                 </li>
 
-                <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Shop</p>
+                {{-- <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Shop</p>
                 <li><a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 2048 2048">
                             <path fill="currentColor"
                                 d="m960 120l832 416v1040l-832 415l-832-415V536zm625 456L960 264L719 384l621 314zM960 888l238-118l-622-314l-241 120zM256 680v816l640 320v-816zm768 1136l640-320V680l-640 320z" />
-                        </svg><span>Products</span></a></li>
+                        </svg><span>Products</span></a></li> --}}
 
                 {{-- <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Connect</p>
                 <li><a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
@@ -146,10 +146,9 @@
                                 <span>My Profile</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('products', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                                {{-- नया आइकन --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="1.5">
@@ -162,7 +161,7 @@
                                 </svg>
                                 <span>Products</span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         {{-- ## Network Section --}}
                         <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Network</p>
@@ -178,7 +177,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('genealogy-tree', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Genealogy Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
@@ -189,7 +188,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('referrals', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Team Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -221,7 +220,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('commissions', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Report Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
@@ -234,7 +233,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('withdraws', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
                                 {{-- Withdraw Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

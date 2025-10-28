@@ -47,8 +47,8 @@
             <div
                 class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
 
-                <img class="w-full h-56 object-cover" src="{{ asset($product->image_path) }}"
-                    alt="{{ $product->name }}">
+                {{-- <img class="w-full h-56 object-cover" src="{{ asset($product->image_path) }}"
+                    alt="{{ $product->name }}"> --}}
 
                 <div class="p-6 flex-grow">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">campa</h3>
@@ -76,8 +76,8 @@
             <div
                 class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
 
-                <img class="w-full h-56 object-cover" src="{{ asset($product->image_path) }}"
-                    alt="{{ $product->name }}">
+                {{-- <img class="w-full h-56 object-cover" src="{{ asset($product->image_path) }}"
+                    alt="{{ $product->name }}"> --}}
 
                 <div class="p-6 flex-grow">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">campa</h3>

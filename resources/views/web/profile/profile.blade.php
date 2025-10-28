@@ -50,16 +50,7 @@
                     <p class="text-green-600 text-sm mt-1 font-medium mb-0.5">{{ $user->created_at->format('d M, Y') }}</p>
                 </div>
             </div>
-            <div>
-                <button
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-1 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 576 512">
-                        <path fill="currentColor"
-                            d="m402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6m156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8M460.1 174L402 115.9L216.2 301.8l-7.3 65.3l65.3-7.3zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1l30.9-30.9c4-4.2 4-10.8-.1-14.9" />
-                    </svg>
-                    Update Profile
-                </button>
-            </div>
+
         </section>
 
 
@@ -115,9 +106,9 @@
 
             <div class="flex flex-col md:flex-row gap-3">
                 <input type="text" readonly value="{{ url('/register?ref=' . $user->username) }}"
-                    class="border rounded-lg px-3 py-2 w-full md:w-2/3 text-gray-600 focus:outline-none">
+                    class="border rounded-lg px-3 py-2 w-full md:w-2/3 text-gray-600 focus:outline-none ">
                 <button onclick="copyLink()"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-1">
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-1 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="1.5"
@@ -126,7 +117,7 @@
                 </button>
             </div>
         </section>
-
+{{--
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-5">Personal Information</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -153,6 +144,10 @@
                     <p class="font-bold text-gray-900">{{ $user->sponsor_id ?? 'Not Available' }}</p>
                 </div>
                 <div>
+                    <p class="text-gray-600 mb-1 font-medium">Role</p>
+                    <p class="font-bold text-gray-900">{{ $user->role_id ?? 'Not Available' }}</p>
+                </div>
+                <div>
                     <p class="text-gray-600 mb-1 font-medium">Status</p>
                     @php
 
@@ -160,24 +155,24 @@
 
                         switch ($user->status->name) {
                             case 'active':
-                                $statusClass = 'text-green-600';
+                                $statusClass = 'text-green-600 rounded bg-green-100 px-2 py-1';
                                 break;
 
                             case 'pending':
-                                $statusClass = 'text-yellow-600';
+                                $statusClass = 'text-yellow-600 rounded bg-yellow-100 px-2 py-1';
                                 break;
 
                             case 'suspended':
-                                $statusClass = 'text-orange-600';
+                                $statusClass = 'text-orange-600 rounded bg-orange-100 px-2 py-1';
                                 break;
 
                             case 'banned':
                             case 'inactive':
-                                $statusClass = 'text-red-600';
+                                $statusClass = 'text-red-600 rounded bg-red-100 px-2 py-1' ;
                                 break;
 
                             default:
-                                $statusClass = 'text-gray-600';
+                                $statusClass = 'text-gray-600 rounded bg-gray-100 px-2 py-1';
                         }
                     @endphp
                     <span class="{{ $statusClass }} font-bold">
@@ -185,7 +180,89 @@
                     </span>
                 </div>
             </div>
-        </section>
+        </section> --}}
+
+        <section class="bg-white rounded shadow p-6 mb-10">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-xl font-semibold text-gray-800">Personal Information</h3>
+                <button
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-1 cursor-pointer text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 576 512">
+                        <path fill="currentColor"
+                            d="m402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6m156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8M460.1 174L402 115.9L216.2 301.8l-7.3 65.3l65.3-7.3zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1l30.9-30.9c4-4.2 4-10.8-.1-14.9" />
+                    </svg>
+                    Update Profile
+                </button>
+            </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {{-- <div>
+            <p class="text-gray-600 text-sm font-medium">Username</p>
+            <p class="font-bold text-blue-500">{{ $user->username }}</p>
+        </div> --}}
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Full Name</p>
+            <p class="font-bold text-gray-900">{{ $user->profile->full_name ?? 'N/A' }}</p>
+        </div>
+        {{-- <div>
+            <p class="text-gray-600 text-sm font-medium">Email</p>
+            <p class="font-bold text-gray-900">{{ $user->email }}</p>
+        </div> --}}
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Mobile Number</p> {{-- Added Mobile --}}
+            <p class="font-bold text-gray-900">{{ $user->profile->mobile ?? 'N/A' }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Date of Birth</p>
+            {{-- <p class="font-bold text-gray-900">{{ $user->profile->dob ? \Carbon\Carbon::parse($user->profile->dob)->format('d M, Y') : 'N/A' ?? 'not available' }}</p> --}}
+            <p class="font-bold text-gray-900">{{ $user->profile?->dob ? \Carbon\Carbon::parse($user->profile->dob)->format('d M, Y') : 'N/A' }}</p>
+        </div>
+
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Joining Date</p>
+            <p class="font-bold text-gray-900">{{ $user->created_at->format('d M, Y') }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Sponsor</p>
+
+            <p class="font-bold text-gray-900">{{ $user->genealogyNode->sponsor->username ?? 'COMPANY' }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Referrer</p>
+            <p class="font-bold text-gray-900">{{ $user->genealogyNode->referrer->username ?? 'N/A' }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Placement</p>
+            <p class="font-bold text-gray-900">Left</p>
+            {{-- <p class="font-bold text-gray-900">{{ $user->genealogyNode->position == 'L' ? 'Left Leg' : ($user->genealogyNode->position == 'R' ? 'Right Leg' : 'N/A') }}</p> --}}
+        </div>
+        <div>
+            <p class="text-gray-600 text-sm font-medium">Status</p>
+            @php
+                $statusClass = 'text-gray-600 bg-gray-100';
+                $statusLabel = 'Unknown';
+                if ($user->status) {
+                    $statusLabel = ucfirst($user->status->label ?? $user->status->name);
+                    switch ($user->status->name) {
+                        case 'active': $statusClass = 'text-green-700 bg-green-100'; break;
+                        case 'pending': $statusClass = 'text-yellow-700 bg-yellow-100'; break;
+                        case 'suspended': $statusClass = 'text-orange-700 bg-orange-100'; break;
+                        case 'banned': case 'inactive': $statusClass = 'text-red-700 bg-red-100'; break;
+                    }
+                }
+            @endphp
+            <span class="{{ $statusClass }} font-semibold text-xs px-2 py-1 rounded-full inline-block">
+                {{ $statusLabel }}
+            </span>
+        </div>
+        {{-- Address can be added here or in a separate section --}}
+        {{-- <div class="md:col-span-2">
+             <p class="text-gray-600 text-sm font-medium">Address</p>
+             <p class="font-bold text-gray-900">{{ $user->profile->address ?? 'N/A' }}</p>
+        </div> --}}
+
+    </div>
+</section>
 
         <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-5">Bank & KYC Details</h3>

@@ -18,7 +18,10 @@ class ProfileController extends Controller
         return view('web.profile.profile', compact('user'));
     }
 
-    public function edit($username) {}
+    public function edit($username) {
+
+
+    }
 
     public function update(Request $request, $username) {}
 }

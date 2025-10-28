@@ -23,40 +23,82 @@
                 {{-- Left Side: Contact Form --}}
                 <div class="bg-white p-8 rounded-2xl shadow-lg">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
-                    <form action="#" method="POST" class="space-y-6">
+                    {{-- <form action="#" method="POST" class="space-y-6">
                         @csrf
-                        {{-- Name --}}
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
                             <input type="text" id="name" name="name" required
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        {{-- Email --}}
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
                             <input type="email" id="email" name="email" required
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        {{-- Subject --}}
                         <div>
                             <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
                             <input type="text" id="subject" name="subject" required
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        {{-- Message --}}
                         <div>
                             <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
                             <textarea id="message" name="message" rows="5" required
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
-                        {{-- Submit Button --}}
                         <div>
                             <button type="submit"
                                 class="w-full bg-blue-600 text-white font-bold px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
                                 Send Message
                             </button>
                         </div>
+                    </form> --}}
+
+                    <form action="#" method="POST" class="space-y-6">
+                        @csrf
+
+                        {{-- Full Name --}}
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       transition duration-200 ease-in-out shadow-sm hover:shadow-md" placeholder="Enter your full name">
+                        </div>
+
+                        {{-- Email --}}
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       transition duration-200 ease-in-out shadow-sm hover:shadow-md" placeholder="example@domain.com">
+                        </div>
+
+                        {{-- Subject --}}
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       transition duration-200 ease-in-out shadow-sm hover:shadow-md" placeholder="Enter your subject">
+                        </div>
+
+                        {{-- Message --}}
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                       transition duration-200 ease-in-out shadow-sm hover:shadow-md resize-none"
+                                placeholder="Write your message here..."></textarea>
+                        </div>
+
+                        {{-- Submit Button --}}
+                        <div>
+                            <button type="submit" class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg
+                       shadow-md hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-0.5
+                       transition duration-200 ease-in-out cursor-pointer">
+                                Send Message
+                            </button>
+                        </div>
                     </form>
+
                 </div>
 
                 {{-- Right Side: Contact Details --}}
@@ -102,6 +144,22 @@
                                 <div>
                                     <h4 class="font-semibold text-gray-800">Email</h4>
                                     <p>sphare@zohomail.in</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-blue-100 text-blue-600 p-2 rounded-full mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2">
+                                            <path d="M3 12a9 9 0 0 0 9 9m9-9a9 9 0 1 0-18 0" />
+                                            <path
+                                                d="M12 7v5l.5.5M18 15h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h2m-6 0v-6" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Supports</h4>
+                                    <p>10:00 - 18:00, Mon - Sat</p>
                                 </div>
                             </div>
                         </div>
