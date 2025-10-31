@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Site!</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* ========== CSS SECTION ========== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            /* Shuruaat mein scrollbar hide rakhte hain */
+            overflow: hidden;
+        }
+
+        /* Yeh overlay hai jo poori screen ko cover karega */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+
+            /* Jab 'hidden' class lagegi, yeh fade out hoga */
+            opacity: 1;
+            visibility: visible;
+            /* 1s ka delay taaki ribbon pehle gire */
+            transition: opacity 1s ease 1s, visibility 1s ease 1s;
+        }
+
+        /* Overlay ko hide karne ke liye JS is class ka istemaal karega */
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Ribbon ke dono hisse (left aur right) */
+        .ribbon-left,
+        .ribbon-right {
+            position: absolute;
+            height: 60px;
+            background: #d9534f; /* Red ribbon color */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+            /* Girne ka animation (0.3s delay ke baad shuru hoga) */
+            transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.3s;
+        }
+
+        .ribbon-left {
+            left: 0;
+            width: 50.5%; /* Thoda overlap taaki gap na dikhe */
+        }
+
+        .ribbon-right {
+            right: 0;
+            width: 50.5%;
+        }
+
+        /* Ribbon ke kate hue hisse (triangle shape) */
+        .ribbon-left::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-style: solid;
+            border-width: 30px 20px 30px 0;
+            border-color: transparent #f0f2f5 transparent transparent;
+        }
+
+        .ribbon-right::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-style: solid;
+            border-width: 30px 0 30px 20px;
+            border-color: transparent transparent transparent #f0f2f5;
+        }
+
+
+        /* Kainchi (Scissors) Icon */
+        #scissors {
+            position: absolute;
+            font-size: 40px;
+            color: #333;
+            cursor: pointer;
+            z-index: 1001; /* Ribbon ke upar */
+
+            /* Center mein position karna */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+
+            /* Animation ke liye transition */
+            transition: transform 0.3s ease;
+        }
+
+        /* Click karne par kainchi ghoomegi */
+        #scissors.cutting {
+            transform: translate(-50%, -50%) rotate(30deg) scale(1.1);
+        }
+
+        /* Ribbon ko girane ke liye JS in classes ka istemaal karega */
+        .ribbon-left.fall {
+            transform: translateY(100vh) rotate(-20deg);
+        }
+
+        .ribbon-right.fall {
+            transform: translateY(100vh) rotate(20deg);
+        }
+
+        /* Chhota sa text jo user ko guide karega */
+        .prompt-text {
+            position: absolute;
+            top: calc(50% + 50px); /* Ribbon ke neeche */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #555;
+            font-weight: bold;
+            z-index: 1001;
+            /* Jab overlay hide hoga, yeh bhi fade ho jayega */
+            transition: opacity 0.3s ease;
+        }
+
+        .welcome-overlay.hidden .prompt-text {
+            opacity: 0;
+        }
+
+
+        /* Aapka Asli Website Content (Jo pehle chupa hua hai) */
+        .main-content {
+            display: none; /* JS ise 'block' karega */
+            padding: 40px;
+            text-align: center;
+        }
+
+        .main-content h1 {
+            font-size: 3rem;
+            color: #333;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+
+        <div class="ribbon-left" id="ribbonLeft"></div>
+        <div class="ribbon-right" id="ribbonRight"></div>
+
+        <i class="fas fa-cut" id="scissors"></i>
+
+        <div class="prompt-text">Click the scissors to cut the tape!</div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Welcome to Our Website!</h1>
+        <p>The grand opening is complete. We are happy to see you here.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.
+        Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu
+        tellus rhoncus, eget elementum purus sodales.</p>
+        </div>
+
+
+    <script>
+        // ========== JAVASCRIPT SECTION ==========
+
+        // 1. Zaroori elements ko select karna
+        const scissors = document.getElementById('scissors');
+        const overlay = document.getElementById('welcomeOverlay');
+        const ribbonLeft = document.getElementById('ribbonLeft');
+        const ribbonRight = document.getElementById('ribbonRight');
+        const mainContent = document.getElementById('mainContent');
+        const body = document.body;
+
+        // 2. Kainchi par click event lagana
+        scissors.addEventListener('click', () => {
+
+            // Kainchi ko cut karte hue dikhana (CSS class add karke)
+            scissors.classList.add('cutting');
+
+            // Ribbon ko girana (CSS class add karke)
+            ribbonLeft.classList.add('fall');
+            ribbonRight.classList.add('fall');
+
+            // Overlay ko hide karna (CSS class add karke)
+            // CSS mein 1s ka delay hai, toh yeh ribbon girne ke baad fade hoga
+            overlay.classList.add('hidden');
+
+            // Asli content ko dikhana
+            mainContent.style.display = 'block';
+
+            // Page par scrollbar ko wapas laana
+            body.style.overflow = 'auto';
+
+        });
+
+    </script>
+</body>
+</html>

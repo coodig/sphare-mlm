@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete the Puzzle to Enter!</title>
+    <style>
+        /* ========== CSS SECTION ========== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Shuru mein scrollbar hide rakhte hain */
+            background-color: #f0f2f5;
+        }
+
+        .puzzle-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f0f2f5;
+            z-index: 1000;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease 0.5s, visibility 1s ease 0.5s; /* Fade out effect */
+        }
+
+        .puzzle-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .puzzle-container {
+            position: relative;
+            width: 400px; /* Example size */
+            height: 400px; /* Example size */
+            border: 2px dashed #ccc;
+            background-color: #e0e2e5;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3x3 grid for puzzle */
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1px; /* Small gap between pieces */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .puzzle-piece {
+            position: relative; /* Essential for z-index and positioning */
+            background-color: #5d6d7e; /* Default piece color */
+            border: 1px solid #c0c2c5;
+            box-sizing: border-box;
+            background-size: cover; /* Background image ko adjust karne ke liye */
+            background-position: center;
+            cursor: grab;
+            transition: border-color 0.2s ease;
+            user-select: none; /* Text selection rokne ke liye */
+            z-index: 1; /* Normal pieces ka z-index */
+        }
+
+        .puzzle-piece.highlight {
+            border-color: #007bff; /* Highlight when dragged over */
+            box-shadow: inset 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .puzzle-piece.dragged {
+            cursor: grabbing;
+            z-index: 100; /* Dragged piece ko upar laane ke liye */
+        }
+
+        /* Puzzle ke background image ko har piece par dikhane ke liye */
+        .puzzle-container.complete .puzzle-piece {
+            background-image: url('https://via.placeholder.com/400x400/87CEEB/FFFFFF?text=Welcome+Image'); /* Default image URL */
+            background-color: transparent; /* Default piece color hatao */
+        }
+
+        /* Missing piece ka placeholder */
+        .puzzle-slot {
+            background-color: #d0d2d5;
+            border: 1px dashed #aaa;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Missing piece ka actual image background */
+        #missing-piece {
+            position: absolute;
+            width: calc(400px / 3 - 1px); /* Container width / grid columns - gap */
+            height: calc(400px / 3 - 1px); /* Container height / grid rows - gap */
+            left: 50%; /* Center the piece initially */
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url('https://via.placeholder.com/400x400/87CEEB/FFFFFF?text=Welcome+Image'); /* Same image as background */
+            background-size: cover;
+            background-position: var(--bg-x) var(--bg-y); /* JS se set hoga */
+            background-color: #5d6d7e;
+            border: 1px solid #c0c2c5;
+            box-sizing: border-box;
+            cursor: grab;
+            z-index: 100; /* Missing piece ko hamesha upar rakho */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out; /* Smooth snap effect */
+        }
+
+        #missing-piece.snap-to-slot {
+            left: var(--target-x); /* JS se set hoga */
+            top: var(--target-y); /* JS se set hoga */
+            transform: translate(0, 0); /* Jab snap hoga, iski zarurat nahi */
+            cursor: default;
+            pointer-events: none; /* Taaki further drag na ho */
+            z-index: 99; /* Snap hone ke baad thoda neeche */
+        }
+
+        .puzzle-message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .main-content {
+            display: none; /* JS ise 'block' karega */
+            padding: 40px;
+            text-align: center;
+        }
+
+        .main-content h1 {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Animation for puzzle completion */
+        .puzzle-container.complete .puzzle-piece {
+            animation: fadeInPiece 1s ease forwards;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes fadeInPiece {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="puzzle-overlay" id="puzzleOverlay">
+        <div class="puzzle-message">Drag the missing piece to complete the image!</div>
+        <div class="puzzle-container" id="puzzleContainer">
+            </div>
+        <div id="missing-piece" draggable="true"></div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Welcome to Our Awesome Site!</h1>
+        <p>You've successfully unlocked our content by completing the puzzle. Explore and enjoy!</p>
+        <p>This is where your amazing website content will live after the user completes the puzzle.
+           Feel free to add anything you want here.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <script>
+        // ========== JAVASCRIPT SECTION ==========
+
+        // 1. Zaroori elements ko select karna
+        const puzzleContainer = document.getElementById('puzzleContainer');
+        const missingPiece = document.getElementById('missing-piece');
+        const puzzleOverlay = document.getElementById('puzzleOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const body = document.body;
+
+        const TOTAL_PIECES = 9; // For a 3x3 puzzle
+        const MISSING_INDEX = 4; // Which piece will be missing (0-indexed, here it's the center piece)
+        const PUZZLE_SIZE = 400; // Corresponding to CSS .puzzle-container width/height
+        const PIECE_SIZE = PUZZLE_SIZE / Math.sqrt(TOTAL_PIECES); // For a 3x3, it's 400/3
+
+        let draggedPiece = null;
+        let isPuzzleComplete = false;
+
+        // 2. Puzzle pieces generate karna
+        function generatePuzzle() {
+            for (let i = 0; i < TOTAL_PIECES; i++) {
+                if (i === MISSING_INDEX) {
+                    // Yeh missing slot hai
+                    const slot = document.createElement('div');
+                    slot.classList.add('puzzle-slot');
+                    slot.dataset.index = i; // Slot ka index store karna
+                    puzzleContainer.appendChild(slot);
+                } else {
+                    // Baaki ke pieces
+                    const piece = document.createElement('div');
+                    piece.classList.add('puzzle-piece');
+                    piece.dataset.index = i;
+
+                    // Calculate background position for each piece
+                    const row = Math.floor(i / 3);
+                    const col = i % 3;
+                    const bgX = -(col * PIECE_SIZE);
+                    const bgY = -(row * PIECE_SIZE);
+                    piece.style.backgroundImage = `url('https://via.placeholder.com/400x400/87CEEB/FFFFFF?text=Welcome+Image')`; // Same image URL
+                    piece.style.backgroundPosition = `${bgX}px ${bgY}px`;
+                    piece.style.transitionDelay = `${i * 0.05}s`; // Staggered animation delay
+
+                    puzzleContainer.appendChild(piece);
+                }
+            }
+        }
+
+        // 3. Missing piece ke background position ko set karna
+        function setMissingPieceBackground() {
+            const row = Math.floor(MISSING_INDEX / 3);
+            const col = MISSING_INDEX % 3;
+            const bgX = -(col * PIECE_SIZE);
+            const bgY = -(row * PIECE_SIZE);
+            missingPiece.style.setProperty('--bg-x', `${bgX}px`);
+            missingPiece.style.setProperty('--bg-y', `${bgY}px`);
+        }
+
+        // 4. Drag and Drop events
+        // Jab drag shuru hota hai
+        missingPiece.addEventListener('dragstart', (e) => {
+            draggedPiece = missingPiece;
+            e.dataTransfer.setData('text/plain', 'missing-piece'); // Data transfer for Firefox
+            e.target.classList.add('dragged');
+            // Drag image ko transparent karna
+            e.dataTransfer.setDragImage(new Image(), 0, 0);
+        });
+
+        // Drag khatm hone par
+        missingPiece.addEventListener('dragend', (e) => {
+            if (draggedPiece) {
+                draggedPiece.classList.remove('dragged');
+                draggedPiece = null;
+            }
+        });
+
+        // Jab piece slot ke upar aata hai
+        puzzleContainer.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Default behaviour rokna (taaki drop ho sake)
+            const target = e.target;
+            if (target.classList.contains('puzzle-slot') && target.dataset.index == MISSING_INDEX && draggedPiece) {
+                target.classList.add('highlight');
+            }
+        });
+
+        // Jab piece slot se hat jaata hai
+        puzzleContainer.addEventListener('dragleave', (e) => {
+            const target = e.target;
+            if (target.classList.contains('puzzle-slot')) {
+                target.classList.remove('highlight');
+            }
+        });
+
+        // Jab piece slot par drop hota hai
+        puzzleContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const target = e.target;
+
+            if (target.classList.contains('puzzle-slot') && target.dataset.index == MISSING_INDEX && draggedPiece) {
+                target.classList.remove('highlight');
+                if (!isPuzzleComplete) {
+                    snapPieceIntoPlace();
+                    isPuzzleComplete = true;
+                    // Puzzle complete hone par website content dikhana
+                    setTimeout(showMainContent, 1200); // Wait for snap animation
+                }
+            }
+        });
+
+        // 5. Piece ko sahi jagah par snap karna
+        function snapPieceIntoPlace() {
+            const missingSlot = document.querySelector(`.puzzle-slot[data-index="${MISSING_INDEX}"]`);
+            if (missingSlot) {
+                const containerRect = puzzleContainer.getBoundingClientRect();
+                const slotRect = missingSlot.getBoundingClientRect();
+
+                // Calculate target position relative to the puzzle container
+                const targetX = slotRect.left - containerRect.left;
+                const targetY = slotRect.top - containerRect.top;
+
+                missingPiece.style.setProperty('--target-x', `${targetX}px`);
+                missingPiece.style.setProperty('--target-y', `${targetY}px`);
+                missingPiece.classList.add('snap-to-slot');
+
+                // Missing piece ko puzzle container ka child bana do
+                // Taaki background-image property kaam kar sake
+                puzzleContainer.appendChild(missingPiece);
+
+                // Add .complete class to container for final animation
+                puzzleContainer.classList.add('complete');
+            }
+        }
+
+        // 6. Main content dikhana
+        function showMainContent() {
+            puzzleOverlay.classList.add('hidden');
+            mainContent.style.display = 'block';
+            body.style.overflow = 'auto'; // Scrollbar wapas laana
+        }
+
+        // Page load hone par puzzle generate karna
+        document.addEventListener('DOMContentLoaded', () => {
+            generatePuzzle();
+            setMissingPieceBackground();
+        });
+
+    </script>
+</body>
+</html>

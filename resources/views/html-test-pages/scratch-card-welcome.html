@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch to Reveal!</title>
+    <style>
+        /* ========== CSS SECTION ========== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Scrollbar hide rakhte hain */
+        }
+
+        /* 1. Asli Website Content (Jo neeche chupa hai) */
+        /* Is baar content ko 'display:none' nahi karenge */
+        /* Yeh scratch overlay ke 'peeche' rahega */
+        .main-content {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 40px;
+            box-sizing: border-box; /* Padding ko height/width mein include karne ke liye */
+        }
+
+        .main-content h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .main-content p {
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* 2. Scratch Overlay (Jo content ke upar hai) */
+        .scratch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease, visibility 1s ease;
+            cursor: cell; /* Crosshair cursor */
+        }
+
+        /* 3. HTML Canvas (Asli scratch area) */
+        #scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 4. Prompt Text (Jo canvas ke upar hai) */
+        .prompt-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            pointer-events: none; /* Taaki text par click na ho, canvas par ho */
+            z-index: 1001; /* Canvas ke upar */
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 5. Hide classes */
+        .scratch-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Taaki click-through ho sake */
+        }
+
+        .prompt-text.hidden {
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-content" id="mainContent">
+        <h1>Welcome!</h1>
+        <p>You've found the hidden content!</p>
+    </div>
+
+    <div class="scratch-overlay" id="scratchOverlay">
+
+        <canvas id="scratch-canvas"></canvas>
+
+        <div class="prompt-text" id="promptText">
+            Scratch here to reveal!
+        </div>
+    </div>
+
+
+    <script>
+        // ========== JAVASCRIPT SECTION ==========
+
+        // 1. Zaroori elements ko select karna
+        const canvas = document.getElementById('scratch-canvas');
+        const ctx = canvas.getContext('2d'); // Canvas ka 2D drawing context
+        const overlay = document.getElementById('scratchOverlay');
+        const promptText = document.getElementById('promptText');
+        const body = document.body;
+
+        let isDrawing = false; // Check karne ke liye ki mouse/finger down hai ya nahi
+        let lastX = 0;
+        let lastY = 0;
+
+        // 2. Canvas ko set karna
+        function setupCanvas() {
+            // Canvas ko poori screen ka size dena
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Yeh "Scratch Card" ka silver color hai
+            ctx.fillStyle = '#C0C0C0'; // Silver color
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // ***** YEH SABSE ZAROORI HAIN *****
+            // Yeh set karta hai ki jab bhi hum kuch "draw" karenge,
+            // toh woh 'add' hone ki jagah 'erase' hoga.
+            ctx.globalCompositeOperation = 'destination-out';
+
+            // "Coin" (scratch tool) ka style set karna
+            ctx.lineWidth = 60; // "Coin" ka size
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+        }
+
+        // 3. Scratching ka function
+        function draw(e) {
+            if (!isDrawing) return; // Agar mouse down nahi hai toh return
+
+            // Prompt text ko hide kar do jab user scratch shuru kare
+            promptText.classList.add('hidden');
+
+            // Mouse/Touch ki current position nikaalna
+            const currentX = e.pageX || e.touches[0].pageX;
+            const currentY = e.pageY || e.touches[0].pageY;
+
+            // Line draw karna (jo 'destination-out' ke kaaran erase karegi)
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY); // Pichhli position se...
+            ctx.lineTo(currentX, currentY); // ...Nayi position tak
+            ctx.stroke();
+
+            // Nayi position ko save karna
+            [lastX, lastY] = [currentX, currentY];
+
+            // Check karo ki kitna scratch ho gaya hai
+            checkReveal();
+        }
+
+        // 4. Events ko set karna (Mouse aur Touch dono ke liye)
+
+        // Start Drawing
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            [lastX, lastY] = [e.pageX, e.pageY];
+        });
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Default scroll rokne ke liye
+            isDrawing = true;
+            [lastX, lastY] = [e.touches[0].pageX, e.touches[0].pageY];
+        });
+
+        // Drawing
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            draw(e);
+        });
+
+        // Stop Drawing
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('touchend', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false); // Agar mouse screen se bahar chala jaye
+
+
+        // 5. Check karna ki kitna % scratch ho gaya hai
+        let revealed = false; // Taaki yeh function baar-baar na chale
+        function checkReveal() {
+            if (revealed) return; // Agar pehle hi reveal ho chuka hai, toh return
+
+            // Canvas ka 10x10 grid check karenge (poora check karne mein slow hoga)
+            let pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let totalPixels = pixels.data.length / 4;
+            let transparentPixels = 0;
+
+            // Har pixel ka 'alpha' channel check karna
+            for (let i = 0; i < totalPixels; i++) {
+                if (pixels.data[i * 4 + 3] === 0) { // Alpha channel
+                    transparentPixels++;
+                }
+            }
+
+            let percentage = (transparentPixels / totalPixels) * 100;
+
+            // Agar 50% se zyada scratch ho gaya hai...
+            if (percentage > 50) {
+                revealed = true;
+                // ...toh poore overlay ko fade out kar do
+                overlay.classList.add('hidden');
+                // Scrollbar wapas laao
+                body.style.overflow = 'auto';
+            }
+        }
+
+        // 6. Shuru karna
+        setupCanvas();
+
+        // Agar user window resize kare, toh canvas ko bhi resize karo
+        window.addEventListener('resize', setupCanvas);
+
+    </script>
+</body>
+</html>

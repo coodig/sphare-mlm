@@ -11,8 +11,10 @@
 
 <nav class="bg-white text-gray-800 px-6 py-3 flex justify-between items-center shadow-md z-10">
 
-    <div class="flex items-center gap-x-2 text-black text-2xl font-bold cursor-pointer">
+    <div class="flex items-center gap-x-2 ms-5 text-black text-2xl font-bold cursor-pointer">
+        @auth
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16" id="sidebar-toggle-button"><path fill="currentColor" d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75m0 4A.75.75 0 0 1 2.75 7h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 7.75m0 4a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75"/></svg>
+        @endauth
         <a href="/">
             <span>
                 Sphare<span class="text-blue-600">MLM</span>

@@ -74,9 +74,9 @@
             @enderror
         </div>
 
-        <div class="flex items-center">
+        <div class="flex items-center ">
             <input id="terms" name="terms" type="checkbox" required
-                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded cursor-pointer">
             <label for="terms" class="ml-2 block text-sm text-gray-700">
                 I agree to the
                 <a href="{{route('terms-and-condition')}}" class="font-medium text-blue-600 hover:text-blue-500">

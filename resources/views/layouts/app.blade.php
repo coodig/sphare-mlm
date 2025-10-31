@@ -47,7 +47,10 @@
 
     <div class="flex flex-1 overflow-y-auto">
         {{-- Sidebar --}}
+        @auth
+
         @include('partials.sidebar')
+        @endauth
 
         {{-- Main Content --}}
         {{-- yahan `rounded-tl-2xl shadow-inner` hata diya hai for a cleaner look --}}

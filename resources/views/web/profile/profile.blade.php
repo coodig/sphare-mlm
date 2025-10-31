@@ -182,7 +182,7 @@
             </div>
         </section> --}}
 
-        <section class="bg-white rounded shadow p-6 mb-10">
+        <section class="bg-white rounded-2xl shadow p-6 mb-10">
             <div class="flex justify-between items-center mb-5">
                 <h3 class="text-xl font-semibold text-gray-800">Personal Information</h3>
                 <button
@@ -269,26 +269,26 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">Account Holder</p>
-                    <p class="font-bold text-gray-900"></p>
+                    <p class="font-bold text-gray-900">Adarsh Vishwakarama</p>
                 </div>
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">Bank Name</p>
-                    <p class="font-bold text-gray-900"></p>
+                    <p class="font-bold text-gray-900">Indian Bank</p>
                 </div>
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">Account Number</p>
-                    <p class="font-bold text-gray-900"></p>
+                    <p class="font-bold text-gray-900">964866324289</p>
                 </div>
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">IFSC Code</p>
-                    <p class="font-bold text-gray-900"></p>
+                    <p class="font-bold text-gray-900">INDB280827</p>
                 </div>
                 <div>
                     <p class="text-gray-600 mb-1 font-medium">UPI ID</p>
-                    <p class="font-bold text-gray-900"></p>
+                    <p class="font-bold text-gray-900">adarsh8881@paytm</p>
                 </div>
                 <div>
-                    <p class="text-gray-600 mb-1 font-medium">KYC Status</p><span class="font-bold text-green-600"></span>
+                    <p class="text-gray-600 mb-1 font-medium">KYC Status</p><span class="text-green-700 bg-green-100 font-semibold text-xs px-2 py-1 rounded-full inline-block">active</span>
                 </div>
             </div>
         </section>

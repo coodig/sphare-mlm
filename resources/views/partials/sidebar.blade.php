@@ -7,12 +7,12 @@
     <nav class="flex-1 overflow-y-auto scrollbar-hide">
 
         <ul class="space-y-1">
+            {{--
             @guest
                 <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Discover</p>
                 <li>
                     <a href="/"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                        {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M11.25 18a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0z" />
                             <path fill="currentColor" fill-rule="evenodd"
@@ -26,7 +26,6 @@
                 <li>
                     <a href="/"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                        {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M6 2.25A2.75 2.75 0 0 0 3.25 5v14A2.75 2.75 0 0 0 6 21.75h7a.75.75 0 0 0 0-1.5H6c-.69 0-1.25-.56-1.25-1.25V5c0-.69.56-1.25 1.25-1.25h10c.69 0 1.25.56 1.25 1.25v5.5a.75.75 0 0 0 1.5 0V5A2.75 2.75 0 0 0 16 2.25z" />
@@ -42,7 +41,6 @@
                 <li>
                     <a href="/"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                        {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M4 6h16v2H4zm2-4h12v2H6zm-4 8v2h2v8a2.003 2.003 0 0 0 2 2h12a2.006 2.006 0 0 0 2.004-2L20 12h2v-2Zm16 10H6v-8h12Z" />
@@ -55,7 +53,6 @@
                 <li>
                     <a href="{{ route('testimonials')  }}"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                        {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path
@@ -67,24 +64,6 @@
                         <span>Testimonials</span>
                     </a>
                 </li>
-
-                {{-- <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Shop</p>
-                <li><a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 2048 2048">
-                            <path fill="currentColor"
-                                d="m960 120l832 416v1040l-832 415l-832-415V536zm625 456L960 264L719 384l621 314zM960 888l238-118l-622-314l-241 120zM256 680v816l640 320v-816zm768 1136l640-320V680l-640 320z" />
-                        </svg><span>Products</span></a></li> --}}
-
-                {{-- <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Connect</p>
-                <li><a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="1.5">
-                                <path
-                                    d="M18 15V9c0-2.828 0-4.243-.879-5.121C16.243 3 14.828 3 12 3H8c-2.828 0-4.243 0-5.121.879C2 4.757 2 6.172 2 9v6c0 2.828 0 4.243.879 5.121C3.757 21 5.172 21 8 21h12M6 8h8m-8 4h8m-8 4h4" />
-                                <path d="M18 8h1c1.414 0 2.121 0 2.56.44c.44.439.44 1.146.44 2.56v8a2 2 0 1 1-4 0z" />
-                            </g>
-                        </svg><span>Blog / News</span></a></li> --}}
 
                 <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">Support</p>
                 <li><a href="{{ route('contact-us') }}"
@@ -101,7 +80,6 @@
                 <li>
                     <a href="{{ route('about-us') }}"
                         class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                        {{-- Add User Icon --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                             <path fill="currentColor" fill-rule="evenodd"
                                 d="M256 42.667C138.18 42.667 42.667 138.179 42.667 256c0 117.82 95.513 213.334 213.333 213.334c117.822 0 213.334-95.513 213.334-213.334S373.822 42.667 256 42.667m0 384c-94.105 0-170.666-76.561-170.666-170.667S161.894 85.334 256 85.334c94.107 0 170.667 76.56 170.667 170.666S350.107 426.667 256 426.667m26.714-256c0 15.468-11.262 26.667-26.497 26.667c-15.851 0-26.837-11.2-26.837-26.963c0-15.15 11.283-26.37 26.837-26.37c15.235 0 26.497 11.22 26.497 26.666m-48 64h42.666v128h-42.666z" />
@@ -117,14 +95,12 @@
                                 d="M7.5 14c1.18 0 2.19-.137 3.05-.389c1 .699 2.33 1.42 4.05 2.27c.916.456 1.79-.578 1.21-1.42c-.727-1.07-1.36-2.11-1.86-3.29c.736-1.17 1.04-2.61 1.04-4.17c0-3.87-1.88-7-7.5-7s-7.5 3.14-7.5 7c0 3.87 1.88 7 7.5 7zm5.61-3.36a1 1 0 0 0-.077.92c.516 1.23 1.17 2.31 1.89 3.37c-1.65-.823-2.88-1.5-3.8-2.14a1 1 0 0 0-.852-.14c-.758.221-1.67.349-2.77.349c-2.63 0-4.2-.728-5.13-1.73C1.43 10.249 1 8.789 1 6.999s.434-3.26 1.37-4.27c.927-1 2.5-1.73 5.13-1.73s4.2.728 5.13 1.73c.94 1.02 1.37 2.48 1.37 4.27c0 1.44-.284 2.68-.888 3.64z"
                                 clip-rule="evenodd" />
                         </svg><span>FAQs</span></a></li>
-            @endguest
+            @endguest --}}
             @auth
-                        {{-- ## General Section --}}
                         <p class="px-3 text-xs text-gray-500 uppercase font-semibold mt-4 mb-2">General</p>
                         <li>
                             <a href="{{ route('dashboard', ['username' => Auth::user()->username]) }}"
                                 class="flex items-center space-x-3 text-base hover:bg-gray-700 hover:text-white p-3 rounded-lg transition-colors">
-                                {{-- Dashboard Icon --}}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path fill="currentColor"
                                         d="M13 8V4q0-.425.288-.712T14 3h6q.425 0 .713.288T21 4v4q0 .425-.288.713T20 9h-6q-.425 0-.712-.288T13 8M3 12V4q0-.425.288-.712T4 3h6q.425 0 .713.288T11 4v8q0 .425-.288.713T10 13H4q-.425 0-.712-.288T3 12m10 8v-8q0-.425.288-.712T14 11h6q.425 0 .713.288T21 12v8q0 .425-.288.713T20 21h-6q-.425 0-.712-.288T13 20M3 20v-4q0-.425.288-.712T4 15h6q.425 0 .713.288T11 16v4q0 .425-.288.713T10 21H4q-.425 0-.712-.288T3 20m2-9h4V5H5zm10 8h4v-6h-4zm0-12h4V5h-4zM5 19h4v-2H5zm4-2" />

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the Cube!</title>
+    <style>
+        /* ========== CSS SECTION ========== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Scrollbar hide rakhte hain */
+            background-color: #222; /* Dark background */
+        }
+
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(34, 34, 34, 0.95);
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Click-through enable karne ke liye */
+        }
+
+        /* 1. The 3D "Scene" */
+        /* Yeh 'perspective' create karta hai, jisse 3D illusion banta hai */
+        .scene {
+            width: 200px;
+            height: 200px;
+            perspective: 800px; /* 3D ki 'gehraai' */
+            margin-bottom: 30px;
+        }
+
+        /* 2. The 3D Object (Cube) */
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d; /* Yeh children ko 3D space mein rakhta hai */
+            transform: rotateX(-30deg) rotateY(-45deg); /* Shuruaati angle */
+            transition: transform 0.2s linear; /* Smooth rotation */
+            cursor: grab;
+        }
+
+        .cube.dragging {
+            cursor: grabbing;
+        }
+
+        /* 3. Cube ke 6 Faces */
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            user-select: none; /* Text select na ho */
+        }
+
+        /* Har face ko uski sahi 3D jagah par rakhna */
+        /* (Half width/height = 100px) */
+
+        .face-front {
+            transform: rotateY(0deg) translateZ(100px);
+            background-color: rgba(0, 150, 255, 0.3); /* Blue */
+        }
+        .face-back {
+            transform: rotateY(180deg) translateZ(100px);
+            background-color: rgba(255, 0, 0, 0.3); /* Red */
+        }
+        .face-right {
+            transform: rotateY(90deg) translateZ(100px);
+            background-color: rgba(0, 255, 0, 0.3); /* Green */
+        }
+        .face-left {
+            transform: rotateY(-90deg) translateZ(100px);
+            background-color: rgba(255, 255, 0, 0.3); /* Yellow */
+        }
+        .face-top {
+            transform: rotateX(90deg) translateZ(100px);
+            background-color: rgba(255, 0, 255, 0.3); /* Magenta */
+        }
+        .face-bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+            background-color: rgba(0, 255, 255, 0.3); /* Cyan */
+        }
+
+        /* 4. Prompt Text aur Button */
+        .prompt-text {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .enter-button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .enter-button:hover {
+            background-color: #eee;
+            transform: scale(1.05);
+        }
+
+        /* 5. Asli Website Content */
+        .main-content {
+            display: none; /* Shuru mein chupa hua */
+            padding: 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .main-content h1 {
+            font-size: 3rem;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+
+        <div class="prompt-text">Drag the cube to explore!</div>
+
+        <div class="scene" id="scene">
+            <div class="cube" id="cube">
+                <div class="cube-face face-front">Front</div>
+                <div class="cube-face face-back">Back</div>
+                <div class="cube-face face-right">Right</div>
+                <div class="cube-face face-left">Left</div>
+                <div class="cube-face face-top">Top</div>
+                <div class="cube-face face-bottom">Bottom</div>
+            </div>
+        </div>
+
+        <button class="enter-button" id="enterButton">Enter Site</button>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Welcome!</h1>
+        <p>You've unlocked the website. This is where your main content lives.</p>
+    </div>
+
+
+    <script>
+        // ========== JAVASCRIPT SECTION ==========
+
+        // 1. Zaroori elements ko select karna
+        const overlay = document.getElementById('welcomeOverlay');
+        const cube = document.getElementById('cube');
+        const scene = document.getElementById('scene');
+        const enterButton = document.getElementById('enterButton');
+        const mainContent = document.getElementById('mainContent');
+        const body = document.body;
+
+        let isDragging = false;
+        let startX, startY;
+
+        // Cube ka current rotation angle store karne ke liye
+        let currentX = -30; // Shuruaati rotation (CSS se match)
+        let currentY = -45; // Shuruaati rotation (CSS se match)
+
+        // 2. Drag Logic
+
+        // Jab mouse click ho (drag shuru)
+        scene.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            cube.classList.add('dragging');
+            // Mouse ka shuruaati position save karna
+            startX = e.pageX;
+            startY = e.pageY;
+            // Transition hata do taaki drag smooth ho
+            cube.style.transition = 'none';
+            e.preventDefault(); // Default drag behaviour rokne ke liye
+        });
+
+        // Jab mouse move ho (drag karte hue)
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return; // Agar drag nahi ho raha toh kuchh mat karo
+
+            // Mouse kitna move hua
+            let deltaX = e.pageX - startX;
+            let deltaY = e.pageY - startY;
+
+            // Naya rotation calculate karna
+            // Mouse X movement se Y-axis par ghumao
+            // Mouse Y movement se X-axis par ghumao
+            let newRotateY = currentY + deltaX * 0.5; // 0.5 se sensitivity kam ki
+            let newRotateX = currentX - deltaY * 0.5;
+
+            // Naya rotation cube par apply karna
+            cube.style.transform = `rotateX(${newRotateX}deg) rotateY(${newRotateY}deg)`;
+        });
+
+        // Jab mouse click chhodein (drag khatm)
+        window.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+
+            isDragging = false;
+            cube.classList.remove('dragging');
+            // Transition wapas laga do
+            cube.style.transition = 'transform 0.2s linear';
+
+            // Mouse kitna move hua (final calculation)
+            let deltaX = e.pageX - startX;
+            let deltaY = e.pageY - startY;
+
+            // Final rotation ko save kar lo taaki agla drag yahin se shuru ho
+            currentY = currentY + deltaX * 0.5;
+            currentX = currentX - deltaY * 0.5;
+        });
+
+
+        // 3. Enter Button Logic
+        enterButton.addEventListener('click', () => {
+            // Overlay ko fade out karo
+            overlay.classList.add('hidden');
+
+            // Asli content ko dikhao
+            mainContent.style.display = 'block';
+
+            // Page par scrollbar ko wapas laao
+            body.style.overflow = 'auto';
+        });
+
+    </script>
+</body>
+</html>

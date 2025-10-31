@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock to Enter</title>
+    <style>
+        /* ========== CSS SECTION ========== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Scrollbar hide rakhte hain */
+            background-color: #334; /* Dark blue background */
+        }
+
+        /* 1. Welcome Overlay */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background-color: #334;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease 0.5s, visibility 1s ease 0.5s; /* 0.5s delay */
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* 2. Lock Styling */
+        .lock-container {
+            position: relative;
+        }
+
+        .lock-body {
+            width: 150px;
+            height: 120px;
+            background: linear-gradient(to top, #c0c0c0, #f0f0f0); /* Silver gradient */
+            border-radius: 10px 10px 20px 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 -2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        /* Lock ka kunda (Shackle) */
+        .lock-shackle {
+            width: 100px;
+            height: 80px;
+            border: 20px solid #d0d0d0;
+            border-bottom: none;
+            border-radius: 60px 60px 0 0;
+            position: absolute;
+            top: -100px; /* Body ke upar */
+            left: 5px;
+            background: linear-gradient(to top, #c0c0c0, #f0f0f0);
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        /* Keyhole (Taale ka chhed) */
+        #keyhole {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: #333;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        #keyhole::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 25px;
+            background: #333;
+        }
+
+        /* Keyhole highlight jab key paas ho */
+        #keyhole.highlight {
+            background-color: #007bff;
+        }
+
+        /* 3. Key Styling (Chaabi) */
+        #key {
+            position: absolute;
+            bottom: 10%; /* Shuruaati position */
+            left: 10%;
+            width: 50px;
+            height: 120px;
+            cursor: grab;
+            z-index: 1001;
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+
+        #key.dragging {
+            cursor: grabbing;
+            transform: scale(1.1) rotate(-15deg);
+        }
+
+        /* Chaabi ka head */
+        .key-head {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to top, #ffd700, #ffec80); /* Gold gradient */
+            border: 3px solid #e0b000;
+            border-radius: 50%;
+            box-sizing: border-box;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Chaabi ka shaft */
+        .key-shaft {
+            width: 10px;
+            height: 70px;
+            background: linear-gradient(to top, #ffd700, #ffec80);
+            border: 3px solid #e0b000;
+            border-top: none;
+            box-sizing: border-box;
+            position: absolute;
+            left: 20px;
+            top: 45px;
+        }
+
+        /* 4. Unlock Animation States */
+
+        /* Jab key keyhole mein ho */
+        #key.in-lock {
+            transform: rotate(90deg) scale(0.9);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease 0.3s;
+        }
+
+        /* Jab taaala khule */
+        .lock-container.unlocked .lock-shackle {
+            transform: translateY(-40px) rotate(15deg);
+        }
+        .lock-container.unlocked .lock-body {
+            transform: translateY(5px);
+        }
+
+        /* 5. Prompt Text */
+        .prompt-text {
+            color: #ccc;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .prompt-text.hidden {
+            opacity: 0;
+        }
+
+        /* 6. Asli Website Content */
+        .main-content {
+            display: none; /* Shuru mein chupa hua */
+            padding: 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .main-content h1 {
+            font-size: 3rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+
+        <div class="lock-container" id="lockContainer">
+            <div class="lock-shackle"></div>
+            <div class="lock-body">
+                <div id="keyhole"></div>
+            </div>
+        </div>
+
+        <div class="prompt-text" id="promptText">
+            Drag the key to the keyhole to unlock
+        </div>
+
+    </div>
+
+    <div id="key" draggable="false">
+        <div class="key-head"></div>
+        <div class="key-shaft"></div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Site Unlocked!</h1>
+        <p>Welcome. You have successfully opened the website.</p>
+    </div>
+
+
+    <script>
+        // ========== JAVASCRIPT SECTION ==========
+
+        // 1. Zaroori elements ko select karna
+        const key = document.getElementById('key');
+        const keyhole = document.getElementById('keyhole');
+        const lockContainer = document.getElementById('lockContainer');
+        const overlay = document.getElementById('welcomeOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const promptText = document.getElementById('promptText');
+        const body = document.body;
+
+        let isDragging = false;
+        let isUnlocked = false;
+
+        // Mouse/Touch aur element ke beech ka offset
+        let offsetX = 0;
+        let offsetY = 0;
+
+        // 2. Drag shuru karne ke functions
+        function startDrag(e) {
+            if (isUnlocked) return; // Agar khul chuka hai toh drag na ho
+
+            isDragging = true;
+            key.classList.add('dragging');
+
+            // Mouse ya touch ki shuruaati position
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+
+            // Key ke top-left corner se mouse kitni door hai
+            const keyRect = key.getBoundingClientRect();
+            offsetX = clientX - keyRect.left;
+            offsetY = clientY - keyRect.top;
+
+            // Transition hata do taaki drag smooth ho
+            key.style.transition = 'none';
+        }
+
+        // 3. Drag karte hue move karne ke functions
+        function whileDrag(e) {
+            if (!isDragging || isUnlocked) return;
+
+            // Default scroll/drag behaviour rokna
+            e.preventDefault();
+
+            // Mouse ya touch ki current position
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+
+            // Key ki nayi position set karna
+            let newX = clientX - offsetX;
+            let newY = clientY - offsetY;
+
+            key.style.left = `${newX}px`;
+            key.style.top = `${newY}px`;
+
+            // Check karo ki key aur keyhole overlap ho rahe hain ya nahi
+            checkOverlap();
+        }
+
+        // 4. Drag khatm karne ke functions
+        function endDrag(e) {
+            if (!isDragging) return;
+
+            isDragging = false;
+            key.classList.remove('dragging');
+            keyhole.classList.remove('highlight');
+
+            // Transition wapas laga do
+            key.style.transition = 'transform 0.3s ease, opacity 0.5s ease';
+
+            // Agar unlock nahi hua toh key wapas apni jagah aa sakti hai
+            // (Abhi ke liye, yeh wahin ruk jaayegi jahaan chhodi)
+        }
+
+        // 5. Overlap Check (Collision Detection)
+        function checkOverlap() {
+            const keyRect = key.getBoundingClientRect();
+            const keyholeRect = keyhole.getBoundingClientRect();
+
+            // Simple rectangle overlap logic
+            const isOverlapping = !(
+                keyRect.right < keyholeRect.left ||
+                keyRect.left > keyholeRect.right ||
+                keyRect.bottom < keyholeRect.top ||
+                keyRect.top > keyholeRect.bottom
+            );
+
+            if (isOverlapping) {
+                keyhole.classList.add('highlight');
+                // Agar mouse chhod diya (ya drag karte hue hi) overlap hua
+                if (!isDragging) { // Yeh check endDrag mein bhi kar sakte hain
+                    unlockSite();
+                }
+            } else {
+                keyhole.classList.remove('highlight');
+            }
+
+            return isOverlapping;
+        }
+
+        // 6. Site ko Unlock karna
+        function unlockSite() {
+            if (isUnlocked) return; // Sirf ek baar unlock ho
+
+            isUnlocked = true;
+            isDragging = false;
+
+            // Key ko keyhole par perfectly set karo (optional, but looks good)
+            const keyholeRect = keyhole.getBoundingClientRect();
+            key.style.left = `${keyholeRect.left - key.offsetWidth / 2 + keyholeRect.width / 2}px`;
+            key.style.top = `${keyholeRect.top - key.offsetHeight / 2 + keyholeRect.height / 2}px`;
+
+            // Key ko ghuma kar gayab karo
+            key.classList.add('in-lock');
+
+            // Taale ko "unlocked" class do taaki CSS animation chale
+            lockContainer.classList.add('unlocked');
+
+            // Prompt text ko hide karo
+            promptText.classList.add('hidden');
+
+            // 1 second baad, poora overlay fade out karo
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 1000); // Animation ke baad
+
+            // 1.5 second baad, main content dikhao
+            setTimeout(() => {
+                mainContent.style.display = 'block';
+                body.style.overflow = 'auto'; // Scrollbar wapas laao
+            }, 1500);
+        }
+
+        // 7. Event Listeners (Mouse aur Touch dono ke liye)
+
+        // Mouse Events
+        key.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', whileDrag);
+        window.addEventListener('mouseup', (e) => {
+            if (isDragging && checkOverlap()) {
+                unlockSite();
+            }
+            endDrag(e);
+        });
+
+        // Touch Events
+        key.addEventListener('touchstart', startDrag, { passive: false });
+        window.addEventListener('touchmove', whileDrag, { passive: false });
+        window.addEventListener('touchend', (e) => {
+            if (isDragging && checkOverlap()) {
+                unlockSite();
+            }
+            endDrag(e);
+        });
+
+    </script>
+</body>
+</html>

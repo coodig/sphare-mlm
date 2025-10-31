@@ -172,7 +172,7 @@
                     </li>
                     <li><a href="{{ route('contact-us') }}" class="hover:text-blue-600 transition-colors">Contact Us</a>
                     </li>
-                    <li><a href="#" class="hover:text-blue-600 transition-colors">Business Plan</a></li>
+                    {{-- <li><a href="#" class="hover:text-blue-600 transition-colors">Business Plan</a></li> --}}
                     <li><a href="{{ route('faqs') }}" class="hover:text-blue-600 transition-colors">FAQs</a></li>
                 </ul>
 
